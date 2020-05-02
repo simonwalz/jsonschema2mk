@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+var argv = require('minimist')(process.argv.slice(2));
+var fs = require('fs');
+
 var level_plus = 0;
 
 var global = [];
@@ -201,7 +204,8 @@ var jsmk_type_simple_mk = function(local) {
 };
 
 //var schema = require("../osiota-app-debug-output/schema.json");
-var schema = require("./test-schema.json");
+var schema = JSON.parse(fs.readFileSync(argv.schema));
+
 //var schema = require("./test-schema-simple.json");
 console.log(jsmk_type_mk(jsmk_type(schema)));
 
