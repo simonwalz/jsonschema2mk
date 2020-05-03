@@ -69,7 +69,6 @@ var jsmk_type_mk = function(local) {
 		s += "\n" +
 			jsmk_type_simple_mk(local.simple);
 	}
-	var examples = local.examples;
 	if (local.object) {
 		s += "\n" +
 			jsmk_type_object_mk(local.object);
@@ -79,8 +78,8 @@ var jsmk_type_mk = function(local) {
 			jsmk_type_array_mk(local.array);
 	}
 
-	if (Array.isArray(examples)) {
-		examples.forEach(function(example) {
+	if (Array.isArray(local.examples)) {
+		local.examples.forEach(function(example) {
 			if (example && JSON.stringify(example) !== "{}") {
 				s+= "\n" +
 					"**Example**\n" +
