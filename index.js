@@ -2,6 +2,12 @@
 
 var argv = require('minimist')(process.argv.slice(2));
 var fs = require('fs');
+var Mustache = require('mustache');
+
+Mustache.escape = function(text) {
+	text = text.toString();
+	return text.replace(/([\\`*_{}\[\]()#+.!-])/g, '\\$1');
+};
 
 var level_plus = 0;
 
@@ -26,7 +32,8 @@ var jsmk_type = function(schema, path) {
 		title: schema.title,
 		description: schema.description,
 		examples: schema.examples,
-		path: path
+		path: path,
+		path_id: path || "root",
 	};
 	if (schema.type === "string" ||
 			schema.type === "number" ||
@@ -49,6 +56,75 @@ var jsmk_type = function(schema, path) {
 	}
 	// type === "array"
 	return local;
+};
+var jsmk_type_m = function(local) {
+	var level = 1;
+	if (local.path) {
+		level = local.path.split(".").length + 1;
+	}
+	var level_s = "";
+	for (var l=0; l<level+level_plus; l++) {
+		level_s += "#";
+	}
+	local.level = level_s;
+
+	local.json = function() {
+		return JSON.stringify(this, undefined, "    ");
+	};
+	local.is_number = function() {
+		//console.log(this);
+		return this.type === "number" || this.type === "integer";
+	};
+	return Mustache.render("{{> type}}", local, {
+		type: "<a name=\"{{{path_id}}}\"></a>\n"+
+			"{{{level}}} {{#path}}{{path}}: {{/path}}{{title}}\n"+
+			"{{#description}}\n"+
+			"\n"+
+			"{{{description}}}\n"+
+			"{{/description}}\n"+
+			"{{#simple}}\n"+
+			"\n"+
+			"{{> simple}}\n"+
+			"{{/simple}}\n"+
+			"{{#object}}\n"+
+			"\n"+
+			"{{> object}}\n"+
+			"{{/object}}{{#array}}\n"+
+			"\n"+
+			"{{> array}}\n"+
+			"{{/array}}\n"+
+			"{{#examples}}\n"+
+			"\n"+
+			"{{> example}}\n"+
+			"{{/examples}}\n",
+		example: "\n"+
+			"**Example**\n"+
+			"\n"+
+			"```json\n"+
+			"{{{json}}}\n"+
+			"```\n",
+//		simple: jsmk_type_simple_mk(local.simple),
+		simple: "**Type:** `{{type}}`"+
+		"{{#is_number}}"+
+		"{{#minimum}}<br/>\n"+
+		"**Minimum:** `{{{.}}}`"+
+		"{{/minimum}}"+
+		"{{#maximum}}<br/>\n"+
+		"**Minimum:** `{{{.}}}`"+
+		"{{/maximum}}"+
+		"{{/is_number}}\n"+
+		"\n",
+//		object: jsmk_type_object_mk(local.object),
+		object: "**Properties**\n" +
+		"\n" +
+		"|Name|Description|Type|Example|\n"+
+		"|----|-----------|----|-------|\n"+
+		"{{#properties_table}}\n"+
+		"|{{#link}}[{{name}}]({{{link}}}){{/link}}{{^link}}{{name}}{{/link}}|{{description}}|{{type}}|{{#examples}}`{{{.}}}` {{/examples}}|\n"+
+		"{{/properties_table}}\n",
+//		array: jsmk_type_array_mk(local.array),
+		array: "{{> type}}",
+	});
 };
 var jsmk_type_mk = function(local) {
 	var s = "<a name=\"" + (local.path || "root") + "\"></a>\n";
@@ -178,7 +254,7 @@ var jsmk_type_array = function(schema, path) {
 };
 
 var jsmk_type_array_mk = function(local) {
-	return jsmk_type_mk(local.items);
+	return jsmk_type_m(local.items);
 };
 
 var jsmk_type_simple = function(schema, path) {
@@ -206,11 +282,11 @@ var jsmk_type_simple_mk = function(local) {
 var schema = JSON.parse(fs.readFileSync(argv.schema));
 
 //var schema = require("./test-schema-simple.json");
-console.log(jsmk_type_mk(jsmk_type(schema)));
+console.log(jsmk_type_m(jsmk_type(schema)));
 
 console.log(
 	global.map(function(item) {
-		return jsmk_type_mk(item);
+		return jsmk_type_m(item);
 	}).join("\n")
 );
 

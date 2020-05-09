@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "minimist": "^1.2.5"
+    "minimist": "^1.2.5",
+    "mustache": "^4.0.1"
   },
   "devDependencies": {},
   "scripts": {
