@@ -2,12 +2,7 @@
 
 var argv = require('minimist')(process.argv.slice(2));
 var fs = require('fs');
-var Mustache = require('mustache');
-
-Mustache.escape = function(text) {
-	text = text.toString();
-	return text.replace(/([\\`*_{}\[\]()#+.!-])/g, '\\$1');
-};
+var Handlebars = require('handlebars');
 
 var level_plus = 0;
 
@@ -68,63 +63,75 @@ var jsmk_type_m = function(local) {
 	}
 	local.level = level_s;
 
-	local.json = function() {
-		return JSON.stringify(this, undefined, "    ");
-	};
+	Handlebars.registerHelper('escape', function(text) {
+		var result = text.toString()
+			.replace(/([\\`*_{}\[\]()#+.!-])/g, '\\$1');
+		return new Handlebars.SafeString(result);
+	});
+	Handlebars.registerHelper('json', function (string) {
+		var result = "```json\n"+
+			JSON.stringify(string, undefined, "    ")+"\n"+
+			"```";
+		return new Handlebars.SafeString(result);
+	});
+	Handlebars.registerHelper('jsoninline', function (string) {
+		var result = "`"+
+			JSON.stringify(string).replace(/(`)/g, "\\$1")+
+			"`";
+		return new Handlebars.SafeString(result);
+	});
 	local.is_number = function() {
 		//console.log(this);
 		return this.type === "number" || this.type === "integer";
 	};
-	return Mustache.render("{{> type}}", local, {
-		type: "<a name=\"{{{path_id}}}\"></a>\n"+
-			"{{{level}}} {{#path}}{{path}}: {{/path}}{{title}}\n"+
-			"{{#description}}\n"+
-			"\n"+
-			"{{{description}}}\n"+
-			"{{/description}}\n"+
-			"{{#simple}}\n"+
-			"\n"+
-			"{{> simple}}\n"+
-			"{{/simple}}\n"+
-			"{{#object}}\n"+
-			"\n"+
-			"{{> object}}\n"+
-			"{{/object}}{{#array}}\n"+
-			"\n"+
-			"{{> array}}\n"+
-			"{{/array}}\n"+
-			"{{#examples}}\n"+
-			"\n"+
-			"{{> example}}\n"+
-			"{{/examples}}\n",
-		example: "\n"+
-			"**Example**\n"+
-			"\n"+
-			"```json\n"+
-			"{{{json}}}\n"+
-			"```\n",
-//		simple: jsmk_type_simple_mk(local.simple),
-		simple: "**Type:** `{{type}}`"+
-		"{{#is_number}}"+
-		"{{#minimum}}<br/>\n"+
-		"**Minimum:** `{{{.}}}`"+
-		"{{/minimum}}"+
-		"{{#maximum}}<br/>\n"+
-		"**Minimum:** `{{{.}}}`"+
-		"{{/maximum}}"+
-		"{{/is_number}}\n"+
-		"\n",
-//		object: jsmk_type_object_mk(local.object),
-		object: "**Properties**\n" +
+	Handlebars.registerPartial("type",
+		"<a name=\"{{{path_id}}}\"></a>\n"+
+		"{{{level}}} {{#if path}}{{escape path}}: {{/if}}{{escape title}}\n"+
+		"{{#if description}}\n"+
+		"\n"+
+		"{{{description}}}\n"+
+		"{{/if}}\n"+
+		"{{#if simple}}\n"+
+		"\n"+
+		"{{> simple simple}}\n"+
+		"{{/if}}\n"+
+		"{{#if object}}\n"+
+		"\n"+
+		"{{> object object}}\n"+
+		"{{/if}}{{#if array}}\n"+
+		"\n"+
+		"{{> array array}}\n"+
+		"{{/if}}\n"+
+		"{{#each examples}}\n"+
+		"\n"+
+		"{{> example}}\n"+
+		"{{/each}}\n");
+	Handlebars.registerPartial("example",
+		"\n"+
+		"**Example**\n"+
+		"\n"+
+		"{{{json .}}}\n");
+	Handlebars.registerPartial("simple",
+		"**Type:** `{{{type}}}`"+
+		"{{#if minimum}}<br/>\n"+
+		"**Minimum:** `{{{minimum}}}`"+
+		"{{/if}}"+
+		"{{#if maximum}}<br/>\n"+
+		"**Minimum:** `{{{maximum}}}`"+
+		"{{/if}}"+
+		"\n");
+	Handlebars.registerPartial("object",
+		"**Properties**\n" +
 		"\n" +
 		"|Name|Description|Type|Example|\n"+
 		"|----|-----------|----|-------|\n"+
-		"{{#properties_table}}\n"+
-		"|{{#link}}[{{name}}]({{{link}}}){{/link}}{{^link}}{{name}}{{/link}}|{{description}}|{{type}}|{{#examples}}`{{{.}}}` {{/examples}}|\n"+
-		"{{/properties_table}}\n",
-//		array: jsmk_type_array_mk(local.array),
-		array: "{{> type}}",
-	});
+		"{{#each properties_table}}\n"+
+		"|{{#if link}}[{{escape name}}]({{{link}}}){{else}}{{escape name}}{{/if}}|{{{description}}}|{{escape type}}|{{#each examples}}{{jsoninline .}} {{/each}}|\n"+
+		"{{/each}}\n");
+	Handlebars.registerPartial("array", "{{> type}}");
+
+	var template = Handlebars.compile("{{> type}}");
+	return template(local);
 };
 var jsmk_type_mk = function(local) {
 	var s = "<a name=\"" + (local.path || "root") + "\"></a>\n";
