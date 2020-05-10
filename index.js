@@ -2,11 +2,32 @@
 
 var argv = require('minimist')(process.argv.slice(2));
 var fs = require('fs');
-var Handlebars = require('handlebars');
-
-var level_plus = 0;
+var path = require('path');
+var Handlebars = require('handlebars').create();
 
 var global = [];
+
+Handlebars.registerHelper(require('./helper.js'));
+var partial_files = [
+	"partials/type.md",
+	"partials/example.md",
+	"partials/simple.md",
+	"partials/object.md",
+	"partials/array.md",
+	"partials/main.md",
+];
+partial_files.forEach(function(file) {
+	Handlebars.registerPartial(
+		path.basename(file, '.md'),
+		fs.readFileSync(file, 'utf8') || ''
+	);
+});
+
+var template = Handlebars.compile("{{> main}}");
+
+var jsmk_type_m = function(local) {
+	return template(local);
+};
 
 var examples_get = function(examples) {
 	if (!Array.isArray(examples) || !examples.length) {
@@ -51,131 +72,6 @@ var jsmk_type = function(schema, path) {
 	}
 	// type === "array"
 	return local;
-};
-var jsmk_type_m = function(local) {
-	var level = 1;
-	if (local.path) {
-		level = local.path.split(".").length + 1;
-	}
-	var level_s = "";
-	for (var l=0; l<level+level_plus; l++) {
-		level_s += "#";
-	}
-	local.level = level_s;
-
-	Handlebars.registerHelper('escape', function(text) {
-		var result = text.toString()
-			.replace(/([\\`*_{}\[\]()#+.!-])/g, '\\$1');
-		return new Handlebars.SafeString(result);
-	});
-	Handlebars.registerHelper('json', function (string) {
-		var result = "```json\n"+
-			JSON.stringify(string, undefined, "    ")+"\n"+
-			"```";
-		return new Handlebars.SafeString(result);
-	});
-	Handlebars.registerHelper('jsoninline', function (string) {
-		var result = "`"+
-			JSON.stringify(string).replace(/(`)/g, "\\$1")+
-			"`";
-		return new Handlebars.SafeString(result);
-	});
-	local.is_number = function() {
-		//console.log(this);
-		return this.type === "number" || this.type === "integer";
-	};
-	Handlebars.registerPartial("type",
-		"<a name=\"{{{path_id}}}\"></a>\n"+
-		"{{{level}}} {{#if path}}{{escape path}}: {{/if}}{{escape title}}\n"+
-		"{{#if description}}\n"+
-		"\n"+
-		"{{{description}}}\n"+
-		"{{/if}}\n"+
-		"{{#if simple}}\n"+
-		"\n"+
-		"{{> simple simple}}\n"+
-		"{{/if}}\n"+
-		"{{#if object}}\n"+
-		"\n"+
-		"{{> object object}}\n"+
-		"{{/if}}{{#if array}}\n"+
-		"\n"+
-		"{{> array array}}\n"+
-		"{{/if}}\n"+
-		"{{#each examples}}\n"+
-		"\n"+
-		"{{> example}}\n"+
-		"{{/each}}\n");
-	Handlebars.registerPartial("example",
-		"\n"+
-		"**Example**\n"+
-		"\n"+
-		"{{{json .}}}\n");
-	Handlebars.registerPartial("simple",
-		"**Type:** `{{{type}}}`"+
-		"{{#if minimum}}<br/>\n"+
-		"**Minimum:** `{{{minimum}}}`"+
-		"{{/if}}"+
-		"{{#if maximum}}<br/>\n"+
-		"**Minimum:** `{{{maximum}}}`"+
-		"{{/if}}"+
-		"\n");
-	Handlebars.registerPartial("object",
-		"**Properties**\n" +
-		"\n" +
-		"|Name|Description|Type|Example|\n"+
-		"|----|-----------|----|-------|\n"+
-		"{{#each properties_table}}\n"+
-		"|{{#if link}}[{{escape name}}]({{{link}}}){{else}}{{escape name}}{{/if}}|{{{description}}}|{{escape type}}|{{#each examples}}{{jsoninline .}} {{/each}}|\n"+
-		"{{/each}}\n");
-	Handlebars.registerPartial("array", "{{> type}}");
-
-	var template = Handlebars.compile("{{> type}}");
-	return template(local);
-};
-var jsmk_type_mk = function(local) {
-	var s = "<a name=\"" + (local.path || "root") + "\"></a>\n";
-	var level = 1;
-	if (local.path) {
-		level = local.path.split(".").length + 1;
-	}
-	for (var l=0; l<level+level_plus; l++) {
-		s += "#";
-	}
-
-	s += " " + (local.path ? local.path + ": " : "") + local.title+"\n";
-	if (local.description) {
-		s += "\n" +
-			local.description + "\n";
-	}
-	if (local.simple) {
-		s += "\n" +
-			jsmk_type_simple_mk(local.simple);
-	}
-	if (local.object) {
-		s += "\n" +
-			jsmk_type_object_mk(local.object);
-	}
-	if (local.array) {
-		s += "\n" +
-			jsmk_type_array_mk(local.array);
-	}
-
-	if (Array.isArray(local.examples)) {
-		local.examples.forEach(function(example) {
-			if (example && JSON.stringify(example) !== "{}") {
-				s+= "\n" +
-					"**Example**\n" +
-					"\n" +
-					"```json\n" +
-					JSON.stringify(example, undefined,
-						"    ") +
-					"\n" +
-					"```\n";
-			}
-		});
-	}
-	return s;
 };
 
 var jsmk_type_object = function(schema, path) {
@@ -226,30 +122,6 @@ var jsmk_type_object = function(schema, path) {
 	console.log("example", local.examples);
 	return local;
 };
-var jsmk_type_object_mk = function(local) {
-	var s = "**Properties**\n" +
-		"\n" +
-		"|Name|Description|Type|Example|\n"+
-		"|----|-----------|----|-------|\n";
-	s += local.properties_table.map(function(t) {
-		var s = "|";
-		if (t.link) {
-			s += "[" + t.name + "](" + t.link + ")";
-		} else {
-			s += t.name;
-		}
-		s += "|"+ (t.description||"-") +"|`"+t.type+"`|";
-		if (Array.isArray(t.examples) && t.examples.length) {
-			s+= "`" + JSON.stringify(
-				examples_get(t.examples)
-			)+"`";
-		}
-		s += "|";
-		return s;
-	}).join("\n") + "\n";
-
-	return s;
-};
 
 var jsmk_type_array = function(schema, path) {
 	var l_path = (path ? path+"." : "") + "items";
@@ -260,29 +132,12 @@ var jsmk_type_array = function(schema, path) {
 	return local;
 };
 
-var jsmk_type_array_mk = function(local) {
-	return jsmk_type_m(local.items);
-};
-
 var jsmk_type_simple = function(schema, path) {
 	/*var local = {
 		"type": schema.type
 	};*/
 	var local = schema;
 	return local;
-};
-
-var jsmk_type_simple_mk = function(local) {
-	var s = "**Type:** `" + local.type + "`\n";
-	if (local.type === "number" || local.type === "integer") {
-		if (typeof local.minimum === "number") {
-			s += "\n**Minimum:** `" + local.minimum + "`\n";
-		}
-		if (typeof local.maximum === "number") {
-			s += "\n**Maximum:** `" + local.maximum + "`\n";
-		}
-	}
-	return s;
 };
 
 //var schema = require("../osiota-app-debug-output/schema.json");
