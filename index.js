@@ -22,7 +22,7 @@ var partial_files = [
 partial_files.forEach(function(file) {
 	Handlebars.registerPartial(
 		path.basename(file, '.md'),
-		fs.readFileSync(file, 'utf8') || ''
+		fs.readFileSync(__dirname + "/" + file, 'utf8') || ''
 	);
 });
 
