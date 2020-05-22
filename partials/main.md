@@ -1,1 +1,1 @@
-{{> type}}
+{{> element schema path=""}}

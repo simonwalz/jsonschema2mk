@@ -1,20 +1,10 @@
-<a name="{{{path_id}}}"></a>
-{{{mdlevel path}}} {{#if path}}{{escape path}}: {{/if}}{{escape title}}
-{{#if description}}
 
-{{{description}}}
+{{#if (equal type "object")}}
+{{> object .}}
+{{else~}}
+{{#if (equal type "array")}}
+{{> array .}}
+{{else}}
+{{> simple}}
 {{/if}}
-{{#if simple}}
-{{> simple simple}}
 {{/if}}
-{{#if object}}
-
-{{> object object}}
-{{/if}}{{#if array}}
-
-{{> array array}}
-{{/if}}
-{{#each examples}}
-
-{{> example}}
-{{/each}}
