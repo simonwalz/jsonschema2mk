@@ -1,1 +1,1 @@
-|{{#mylink .}}{{escape name}}{{/mylink}}|{{{or description title}}}|{{escape display_type}}|{{#each (get_examples .)}}{{jsoninline .}} {{/each}}|
+|{{#mylink .}}{{escape name}}{{/mylink}}|{{{or description title}}}{{#if (or description title)}}<br/>{{else}}–{{/if}}{{>extra_inline .}}|{{escape display_type}}|

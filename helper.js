@@ -117,3 +117,7 @@ exports.mylink = function(object, options) {
 	}
 	return options.fn(object);
 };
+
+exports.plus = function(a, b) {
+	return a + b;
+};

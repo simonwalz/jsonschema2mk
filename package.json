@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": "index.js",
   "dependencies": {
     "handlebars": "^4.7.6",
     "minimist": "^1.2.5"

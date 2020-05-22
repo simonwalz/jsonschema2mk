@@ -12,6 +12,8 @@ var partial_files = [
 	"partials/type.md",
 	"partials/example.md",
 	"partials/simple.md",
+	"partials/extra.md",
+	"partials/extra_inline.md",
 	"partials/object.md",
 	"partials/object_property.md",
 	"partials/array.md",
