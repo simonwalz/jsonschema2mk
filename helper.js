@@ -50,15 +50,14 @@ exports.regexpTest = function(text, regexp) {
 	return r.test(text.toString());
 };
 
+exports.level_plus = 0;
 exports.mdlevel = function(path) {
-	var level_plus = 0;
-
 	var level = 1;
 	if (path && path !== "root") {
 		level = path.split(".").length + 1;
 	}
 	return new Handlebars.SafeString(
-		"#".repeat(level+level_plus)
+		"#".repeat(level+exports.level_plus)
 	);
 };
 
@@ -120,4 +119,11 @@ exports.mylink = function(object, options) {
 
 exports.plus = function(a, b) {
 	return a + b;
+};
+
+exports.length = function(object) {
+	if (typeof object === "object" && object !== null) {
+		return Object.keys(object).length;
+	}
+	return false;
 };

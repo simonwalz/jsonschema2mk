@@ -3,13 +3,13 @@
 {{#if description}}
 
 {{{description}}}
+
 {{/if}}
-{{> type .}}
-{{#each (get_examples .)}}
 
-{{> example}}
-{{/each}}
-{{#each (get_ref_items)}}
-
-{{>element .}}
-{{/each}}
+{{> type . ~}}
+{{#each (get_examples .) ~}}
+{{> example ~}}
+{{/each ~}}
+{{#each (get_ref_items) ~}}
+{{>element . ~}}
+{{/each ~}}

@@ -1,10 +1,9 @@
-
-{{#if (equal type "object")}}
-{{> object .}}
+{{#if (equal type "object") ~}}
+{{> object . ~}}
 {{else~}}
-{{#if (equal type "array")}}
-{{> array .}}
-{{else}}
-{{> simple}}
-{{/if}}
-{{/if}}
+{{#if (equal type "array") ~}}
+{{> array . ~}}
+{{else~}}
+{{> simple ~}}
+{{/if ~}}
+{{/if ~}}

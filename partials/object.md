@@ -1,3 +1,4 @@
+{{#if (length properties) ~}}
 **{{prefix_text}}Properties**
 
 |Name|Description|Type|
@@ -6,6 +7,10 @@
 {{> object_property (jsmk_property . path=(pathjoin path @key .) name=@key)}}
 {{/each}}
 
+{{else}}
+**{{prefix_text}}Properties: None**
+
+{{/if}}
 {{#if (isdefined required)}}
 **{{prefix_text}}Required Properties:** {{escape required}}<br/>
 {{/if~}}
