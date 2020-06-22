@@ -4,11 +4,8 @@
 |Name|Description|Type|
 |----|-----------|----|
 {{#each properties ~}}
-{{> object_property (jsmk_property . path=(pathjoin path @key .) name=@key)}}
+{{> object_property (jsmk_property . path=(pathjoin ../path @key .)) name=@key}}
 {{/each}}
-
-{{else}}
-**{{prefix_text}}Properties: None**
 
 {{/if}}
 {{#if (isdefined required)}}

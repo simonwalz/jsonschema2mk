@@ -31,6 +31,7 @@ var data = {
 if (typeof argv.level !== "undefined") {
 	Helper.level_plus = argv.level;
 }
+Helper.data = data;
 
 if (argv.plugin) {
 	require(argv.plugin)(data, load_partial_dir, Handlebars, Helper);

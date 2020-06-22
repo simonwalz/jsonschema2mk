@@ -51,10 +51,13 @@ exports.regexpTest = function(text, regexp) {
 };
 
 exports.level_plus = 0;
-exports.mdlevel = function(path) {
+exports.mdlevel = function(path, options) {
 	var level = 1;
 	if (path && path !== "root") {
-		level = path.split(".").length + 1;
+		level = path.split(/\./).length + 1;
+	}
+	if (options.hash.plus) {
+		level += options.hash.plus;
 	}
 	return new Handlebars.SafeString(
 		"#".repeat(level+exports.level_plus)
@@ -62,8 +65,15 @@ exports.mdlevel = function(path) {
 };
 
 exports.pathjoin = function(path, property_name, object) {
-	return (path ? path+"." : "") + property_name +
-		(object.type === "array" ? "[]" : "");
+	if (property_name === "") {
+		path = (path ? path : "item") +
+			(object.type === "array" ? "[]" : "");
+	} else {
+		path = (path ? path+"." : "") + property_name +
+			(object.type === "array" ? "[]" : "");
+	}
+	// dont increment level on oneOf, anyOf, allOf, not:
+	return path.replace(/: \./, ": ");
 };
 
 exports.jsmk_property = function(property, options) {
@@ -71,17 +81,18 @@ exports.jsmk_property = function(property, options) {
 		...property,
 		...options.hash,
 	};
+	o = exports.getref(o);
 	if (!Array.isArray(o.examples) || !o.examples.length) {
-		if (typeof property.default !== "undefined") {
-			o.examples = [ property.default ];
+		if (typeof o.default !== "undefined") {
+			o.examples = [ o.default ];
 		}
 	}
-	o.display_type = property.type;
-	if (property.type === "array") {
-		o.display_type = property.items.type + "[]";
+	o.display_type = o.type;
+	if (o.type === "array") {
+		o.display_type = o.items.type + "[]";
 	}
 
-	if (property.type === "object" || property.type === "array") {
+	if (o.type === "object" || o.type === "array") {
 		exports.push_ref_item(o);
 		o.link = "#"+o.path;
 	}
@@ -98,6 +109,11 @@ exports.get_ref_items = function() {
 };
 
 exports.push_ref_item = function(item) {
+	if (ref_items.filter(function(ri) {
+		return ri.path === item.path;
+	}).length) {
+		return;
+	}
 	ref_items.push(item);
 	return "";
 };
@@ -126,4 +142,18 @@ exports.length = function(object) {
 		return Object.keys(object).length;
 	}
 	return false;
+};
+
+exports.getref = function(object) {
+	if (typeof object['$ref'] === "string") {
+		var o = exports.data.schema;
+		var path = object['$ref'].replace(/^#\//, '');
+		path.split(/\//)
+				.forEach(function(p) {
+			o = o[p];
+		});
+		o.path = path;
+		return o;
+	}
+	return object;
 };

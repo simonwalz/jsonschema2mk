@@ -1,9 +1,22 @@
 {{#if (equal type "object") ~}}
 {{> object . ~}}
-{{else~}}
+{{~else~}}
 {{#if (equal type "array") ~}}
 {{> array . ~}}
-{{else~}}
+{{~else~}}
 {{> simple ~}}
 {{/if ~}}
 {{/if ~}}
+
+{{#each oneOf}}
+<br>**Option {{plus @key 1}} (alternative):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": ")))}}
+{{/each}}
+{{#each anyOf}}
+<br>**Option {{plus @key 1}} (optional):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) "]: ")))}}
+{{/each}}
+{{#each allOf}}
+<br>{{> element_part . type=(or type ../type) path=(pathjoin path @key)}}
+{{/each}}
+{{#each not}}
+<br>**Not [{{plus @key 1}}]:** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "not[" (plus (plus @key 1) "]: ")))}}
+{{/each}}

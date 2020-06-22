@@ -4,4 +4,4 @@
 
 {{{items.description}}}
 {{/if}}
-{{> type items path=(pathjoin path "item" .) prefix_text="Item "}}
+{{> type items path=(pathjoin path "" .) prefix_text="Item "}}

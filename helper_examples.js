@@ -35,7 +35,10 @@ var merge_examples_object = function(properties) {
 	var e = {};
 	for (var name in properties) {
 		var property = properties[name];
-		e[name] = merge_examples(property);
+		var v = merge_examples(property);
+		if (typeof v !== "undefined") {
+			e[name] = v;
+		}
 	}
 	return e;
 };
