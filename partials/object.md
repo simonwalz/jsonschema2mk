@@ -4,7 +4,17 @@
 |Name|Description|Type|
 |----|-----------|----|
 {{#each properties ~}}
-{{> object_property (jsmk_property . path=(pathjoin ../path @key .)) name=@key}}
+{{> object_property (jsmk_property . path=(pathjoinobj ../path @key .)) name=@key}}
+{{/each}}
+
+{{/if}}
+{{#if (length patternProperties) ~}}
+**{{prefix_text}}Properties (Pattern)**
+
+|Name|Description|Type|
+|----|-----------|----|
+{{#each patternProperties ~}}
+{{> object_property (jsmk_property . path=(pathjoinobj ../path @key .)) name=@key}}
 {{/each}}
 
 {{/if}}
@@ -12,6 +22,16 @@
 **{{prefix_text}}Required Properties:** {{escape required}}<br/>
 {{/if~}}
 {{#if (isdefined additionalProperties)}}
+{{#if (equal (type additionalProperties) "boolean")}}
 **{{prefix_text}}Additional Properties:** {{jsoninline additionalProperties}}<br/>
-{{/if}}
+{{else}}
+**{{prefix_text}}Additional Properties**
 
+|Name|Description|Type|
+|----|-----------|----|
+{{#each properties ~}}
+{{> object_property (jsmk_property . path=(pathjoinobj ../path @key .)) name=@key}}
+{{/each}}
+
+{{/if}}
+{{/if}}

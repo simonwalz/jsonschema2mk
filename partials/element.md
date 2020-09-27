@@ -1,5 +1,5 @@
-<a name="{{{or path 'root'}}}"></a>
-{{{mdlevel path}}} {{#if path}}{{escape path}}: {{/if}}{{escape title}}
+<a name="{{{tolink (or path 'root')}}}"></a>
+{{{mdlevel path}}}{{#if path}} {{escape path}}:{{/if}}{{#if title}} {{escape title}}{{/if}}
 {{#if description}}
 
 {{{description}}}

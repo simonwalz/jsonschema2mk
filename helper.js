@@ -4,6 +4,11 @@ exports.or = function(a, b) {
 	return a || b;
 };
 
+exports.type = function(value) {
+	if (Array.isArray(value)) return "array";
+	return typeof value;
+};
+
 exports.isdefined = function(value) {
 	if (typeof value === "undefined" || value === null)
 		return false;
@@ -64,13 +69,21 @@ exports.mdlevel = function(path, options) {
 	);
 };
 
+exports.pathjoinobj = function(path, property_name, object) {
+	if (property_name === "") {
+		path = (path ? path : "item");
+	} else {
+		path = (path ? path+"." : "") + property_name;
+	}
+	path = path + (object.type === "array" ? "[]" : "");
+	// dont increment level on oneOf, anyOf, allOf, not:
+	return path.replace(/: \./, ": ");
+}
 exports.pathjoin = function(path, property_name, object) {
 	if (property_name === "") {
-		path = (path ? path : "item") +
-			(object.type === "array" ? "[]" : "");
+		path = (path ? path : "item");
 	} else {
-		path = (path ? path+"." : "") + property_name +
-			(object.type === "array" ? "[]" : "");
+		path = (path ? path+"." : "") + property_name;
 	}
 	// dont increment level on oneOf, anyOf, allOf, not:
 	return path.replace(/: \./, ": ");
@@ -127,11 +140,16 @@ exports.mylink = function(object, options) {
 	}*/
 
 	if (object.link) {
+		var link = exports.tolink(object.link);
 		return new Handlebars.SafeString(
-			"["+options.fn(object)+"]("+object.link+")");
+			"["+options.fn(object)+"]("+link+")");
 	}
 	return options.fn(object);
 };
+exports.tolink = function(link) {
+	link = link.toLowerCase().replace(/[^a-zA-Z0-9#_-]/g, "");
+	return link;
+}
 
 exports.plus = function(a, b) {
 	return a + b;
@@ -156,4 +174,19 @@ exports.getref = function(object) {
 		return o;
 	}
 	return object;
+};
+
+exports.noproperties = function(object) {
+	if (exports.length(object.properties) ||
+			exports.length(object.patternProperties) ||
+			exports.length(object.additionalProperties) ||
+			object.additionalProperties === true ||
+			exports.length(object.items) ||
+			exports.length(object.oneOf) ||
+			exports.length(object.anyOf) ||
+			exports.length(object.allOf) ||
+			exports.length(object.not)) {
+		return false;
+	}
+	return true;
 };

@@ -10,6 +10,9 @@
 {{~#if (isdefined const)}}<br/>
 **{{prefix_text}}Constant Value:** {{jsoninline const}}
 {{~/if}}
+{{~#if (isdefined format)}}<br/>
+**{{prefix_text}}Format:** {{jsoninline format}}
+{{~/if}}
 {{~#if (isdefined exclusiveMinimum)}}<br/>
 **{{prefix_text}}Minimum (exclusive):** {{jsoninline exclusiveMinimum}}
 {{~/if}}

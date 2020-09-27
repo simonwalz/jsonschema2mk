@@ -20,3 +20,6 @@
 {{#each not}}
 <br>**Not [{{plus @key 1}}]:** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "not[" (plus (plus @key 1) "]: ")))}}
 {{/each}}
+{{#if (noproperties .)}}
+**No properties.**
+{{/if}}
