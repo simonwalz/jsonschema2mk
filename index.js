@@ -24,7 +24,7 @@ if (argv.partials) {
 }
 
 var data = {
-	schema: JSON.parse(fs.readFileSync(argv.schema)),
+	schema: JSON.parse(fs.readFileSync(argv.schema || "schema.json")),
 	argv: argv,
 };
 
