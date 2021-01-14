@@ -1,0 +1,30 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines
+[*]
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# JavaScript files:
+[*.js]
+indent_style = tab
+tab_width = 8
+
+# JSON files:
+[*.json]
+indent_style = tab
+tab_width = 4
+
+# Other files:
+[{package.json,*.yml,*.md}]
+indent_style = space
+indent_size = 2
+
+[*.hbs,*.{diff,md}]
+insert_final_newline = false
+
