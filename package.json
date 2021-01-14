@@ -1,7 +1,7 @@
 {
-  "name": "js2mk",
+  "name": "jsonschema2mk",
   "version": "1.0.0",
-  "description": "",
+  "description": "JSON schema to markdown generator",
   "main": "index.js",
   "bin": "index.js",
   "dependencies": {
@@ -9,6 +9,11 @@
     "minimist": "^1.2.5"
   },
   "devDependencies": {},
+  "homepage": "https://github.com/simonwalz/jsonschema2mk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simonwalz/jsonschema2mk.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
