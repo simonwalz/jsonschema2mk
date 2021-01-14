@@ -1,0 +1,7 @@
+old_test/
+*.un~
+*.swp
+.editorconfig
+test.md
+test2.md
+test-schema*
