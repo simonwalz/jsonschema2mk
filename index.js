@@ -1,42 +1,51 @@
 #!/usr/bin/env node
 
-var argv = require('minimist')(process.argv.slice(2));
-var fs = require('fs');
-var path = require('path');
-var Handlebars = require('handlebars').create();
-var Helper = require('./helper.js');
+const fs = require('fs');
+const path = require('path');
 
-Handlebars.registerHelper(Helper);
-Handlebars.registerHelper(require('./helper_examples.js'));
+var jsonschema2mk = function(options) {
+	// TODO: copy structure:
+	this.Helper = require('./helper.js');
+	this.Handlebars = require('handlebars').create();
 
-var load_partial_dir = function(dir) {
+	this.Handlebars.registerHelper(this.Helper);
+	this.Handlebars.registerHelper(require('./helper_examples.js'));
+
+	this.load_partial_dir(__dirname + "/partials/");
+	if (options.partials) {
+		this.load_partial_dir(options.partials);
+	}
+
+	this.data = {
+		schema: JSON.parse(fs.readFileSync(
+				options.schema || "schema.json")),
+		argv: options,
+	};
+
+	if (typeof options.level !== "undefined") {
+		this.Helper.level_plus = options.level;
+	}
+	this.Helper.data = this.data;
+
+	if (options.plugin) {
+		require(options.plugin)(this.data, this);
+	}
+};
+jsonschema2mk.prototype.load_partial_dir = function(dir) {
+	var _this = this;
 	var partial_files = fs.readdirSync(dir);
 	partial_files.forEach(function(file) {
-		Handlebars.registerPartial(
+		_this.Handlebars.registerPartial(
 			path.basename(file, '.md'),
 			fs.readFileSync(dir + "/" + file, 'utf8') || ''
 		);
 	});
 };
-load_partial_dir(__dirname + "/partials/");
-if (argv.partials) {
-	load_partial_dir(argv.partials);
-}
-
-var data = {
-	schema: JSON.parse(fs.readFileSync(argv.schema || "schema.json")),
-	argv: argv,
+jsonschema2mk.prototype.generate = function() {
+	if (!this._generate) {
+		this._generate = this.Handlebars.compile("{{> main}}");
+	}
+	return this._generate.apply(this, arguments);
 };
 
-if (typeof argv.level !== "undefined") {
-	Helper.level_plus = argv.level;
-}
-Helper.data = data;
-
-if (argv.plugin) {
-	require(argv.plugin)(data, load_partial_dir, Handlebars, Helper);
-}
-
-var template = Handlebars.compile("{{> main}}");
-console.log(template(data));
-
+module.exports = jsonschema2mk;
