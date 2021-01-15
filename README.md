@@ -22,6 +22,12 @@ Generate DOC.md:
 npx jsonschema2mk --schema schema.json >DOC.md
 ```
 
+Overwrite partials:
+
+```sh
+npx jsonschema2mk --schema schema.json --partials dir/ >DOC.md
+```
+
 ## Add to package.json
 
 ```json
