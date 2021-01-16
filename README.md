@@ -45,7 +45,11 @@ Example to overwrite partials:
 ```js
 const fs = require("fs");
 
-module.exports = function(data, load_partial_dir, Handlebars, Helper, template){
-        load_partial_dir(__dirname + "/partials");
+module.exports = function(data, jsonschema2mk){
+        jsonschema2mk.load_partial_dir(__dirname + "/partials");
 };
 ```
+
+## Use as lib:
+
+See `cli.js`
