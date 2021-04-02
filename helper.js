@@ -4,6 +4,10 @@ exports.or = function(a, b) {
 	return a || b;
 };
 
+exports.and = function(a, b) {
+	return a && b;
+};
+
 exports.type = function(value) {
 	if (Array.isArray(value)) return "array";
 	return typeof value;
@@ -188,5 +192,22 @@ exports.noproperties = function(object) {
 			exports.length(object.not)) {
 		return false;
 	}
+	return true;
+};
+
+exports.title_isnot_name = function(object) {
+	if (typeof object.title !== "string") return true;
+	if (typeof object.name !== "string") return true;
+	var name = object.name;
+	var title = object.title.replace(/[^a-zA-Z]/g, '_').toLowerCase();
+	var title_camelcase = object.title.replace(/[^a-zA-Z]/, '');
+	var title_camelcase_lower = title_camelcase.charAt(0).toLowerCase() +
+			title_camelcase.slice(1)
+	var title_camelcase_upper = title_camelcase.charAt(0).toUpperCase() +
+			title_camelcase.slice(1)
+
+	if (name === title) return false;
+	if (name === title_camelcase_lower) return false;
+	if (name === title_camelcase_upper) return false;
 	return true;
 };

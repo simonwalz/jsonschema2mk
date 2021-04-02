@@ -1,1 +1,10 @@
-|{{#mylink .}}{{escape name}}{{/mylink}}|{{{or description title}}}{{#if (or description title)}}<br/>{{else}}–{{/if}}{{>extra_inline .}}|{{escape display_type}}|
+|
+	{{~#mylink .}}`{{name}}`{{/mylink ~}}
+	{{#if (and title (title_isnot_name .))}} ({{title}}){{/if ~}}
+|
+	{{~#if description ~}}
+	{{{description}}}<br/>{{/if ~}}
+	{{>extra_inline . ~}}
+|
+	{{~escape display_type ~}}
+|
