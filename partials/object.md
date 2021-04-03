@@ -1,8 +1,7 @@
 {{#if (length properties) ~}}
 **{{prefix_text}}Properties**
 
-|Name|Description|Type|
-|----|-----------|----|
+{{> object_property_header}}
 {{#each properties ~}}
 {{> object_property (jsmk_property . path=(pathjoinobj ../path @key .)) name=@key}}
 {{/each}}
@@ -11,8 +10,7 @@
 {{#if (length patternProperties) ~}}
 **{{prefix_text}}Properties (Pattern)**
 
-|Name|Description|Type|
-|----|-----------|----|
+{{> object_property_header}}
 {{#each patternProperties ~}}
 {{> object_property (jsmk_property . path=(pathjoinobj ../path @key .)) name=@key}}
 {{/each}}
@@ -27,8 +25,7 @@
 {{else}}
 **{{prefix_text}}Additional Properties**
 
-|Name|Description|Type|
-|----|-----------|----|
+{{> object_property_header}}
 {{#each properties ~}}
 {{> object_property (jsmk_property . path=(pathjoinobj ../path @key .)) name=@key}}
 {{/each}}
