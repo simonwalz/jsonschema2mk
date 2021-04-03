@@ -1,6 +1,6 @@
-{{#if description}}
+{{#if (or description deprecated)}}
 
-{{{description}}}
+{{#if deprecated}}(DEPRECATED) {{/if}}{{{description}}}
 
 {{/if}}
 

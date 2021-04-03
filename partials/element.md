@@ -1,8 +1,8 @@
 <a name="{{{tolink (or path 'root')}}}"></a>
 {{{mdlevel path}}}{{#if path}} {{escape path}}:{{/if}}{{#if title}} {{escape title}}{{/if}}
-{{#if description}}
+{{#if (or description deprecated)}}
 
-{{{description}}}
+{{#if deprecated}}(DEPRECATED) {{/if}}{{{description}}}
 
 {{/if}}
 

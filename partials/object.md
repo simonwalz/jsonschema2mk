@@ -34,4 +34,11 @@
 {{/each}}
 
 {{/if}}
-{{/if}}
+{{/if~}}
+
+{{#if (isdefined minProperties)}}
+**{{prefix_text}}Minimal Properties:** {{escape minProperties}}<br/>
+{{/if~}}
+{{#if (isdefined maxProperties)}}
+**{{prefix_text}}Maximal Properties:** {{escape maxProperties}}<br/>
+{{/if~}}

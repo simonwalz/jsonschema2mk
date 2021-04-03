@@ -2,13 +2,49 @@
 
 This project allows to generate documentation from [json-schema](https://json-schema.org).
 
-<!--
-Supports:
-* properties
-* all-of
-* one-of
-* ...
--->
+
+### Supported JSON schema features
+
+  * Basic attributes:
+    * title, description, default, examples
+    * enum, const
+    * deprecated
+  * number, integer
+    * minimum, maximum, exclusiveMinimum, exclusiveMaximum
+    * multipleOf
+  * string
+    * minLength, maxLength
+    * format
+    * pattern
+    * contentMediaType
+    * contentEncoding
+  * boolean
+  * null
+  * object
+    * properties
+    * additionalProperties (as boolean and as object)
+    * patternProperties
+    * required
+    * maxProperties
+    * minProperties
+  * array
+    * items
+    * maxItems
+    * minItems
+    * uniqueItems
+    * contains
+    * maxContains
+    * minContains
+  * allOf, oneOf, anyOf, not
+
+
+### Unsupported JSON schema features
+
+  * if, then, else
+  * object, propertyNames.pattern
+  * object, dependencies (Pattern and Schema)
+  * array, items: multiple items
+
 
 ## Install & Usage
 
