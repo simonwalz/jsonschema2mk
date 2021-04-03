@@ -3,7 +3,7 @@
 
 {{> object_property_header}}
 {{#each properties ~}}
-{{> object_property (jsmk_property . path=(pathjoinobj ../path @key .)) name=@key}}
+{{> object_property (jsmk_property . path=(pathjoinobj ../path @key .) parent=.. name=@key)}}
 {{/each}}
 
 {{/if}}
@@ -12,13 +12,10 @@
 
 {{> object_property_header}}
 {{#each patternProperties ~}}
-{{> object_property (jsmk_property . path=(pathjoinobj ../path @key .)) name=@key}}
+{{> object_property (jsmk_property . path=(pathjoinobj ../path @key .) parent=.. name=@key)}}
 {{/each}}
 
 {{/if}}
-{{#if (isdefined required)}}
-**{{prefix_text}}Required Properties:** {{escape required}}<br/>
-{{/if~}}
 {{#if (isdefined additionalProperties)}}
 {{#if (equal (type additionalProperties) "boolean")}}
 **{{prefix_text}}Additional Properties:** {{#unless additionalProperties}}not {{/unless}}allowed<br/>
@@ -27,7 +24,7 @@
 
 {{> object_property_header}}
 {{#each properties ~}}
-{{> object_property (jsmk_property . path=(pathjoinobj ../path @key .)) name=@key}}
+{{> object_property (jsmk_property . path=(pathjoinobj ../path @key .) parent=.. name=@key)}}
 {{/each}}
 
 {{/if}}
@@ -40,5 +37,5 @@
 **{{prefix_text}}Maximal Properties:** {{escape maxProperties}}<br/>
 {{/if~}}
 {{#if (and (isdefined propertyNames) (isdefined propertyNames.pattern))}}
-**{{prefix_text}}Property Name Pattern:** {{jsoninline propertyNames.pattern}}<br/>
+**{{prefix_text}}Property Name Pattern:** {{code propertyNames.pattern}}<br/>
 {{/if~}}

@@ -33,7 +33,7 @@
 **Maximum Items:** {{escape maxItems}}<br/>
 {{/if~}}
 {{#if (isdefined uniqueItems)}}
-**Unique Items:** {{jsoninline uniqueItems}}<br/>
+**Unique Items:** {{#if uniqueItems}}yes{{else}}no{{/if}}<br/>
 {{/if~}}
 
 {{/if~}}

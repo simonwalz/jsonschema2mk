@@ -1,2 +1,2 @@
-|Name|Description|Type|
-|----|-----------|----|
+|Name|Type|Description|Required|
+|----|----|-----------|--------|

@@ -6,9 +6,9 @@ This examples show an item list in an object.
 
 **Properties**
 
-|Name|Description|Type|
-|----|-----------|----|
-|[`elements`](#elements)||array|
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|[**elements**](#elements)|`array`|||
 
 **Additional Properties:** not allowed<br/>
 **Example**
@@ -32,9 +32,9 @@ This examples show an item list in an object.
 
 **Item 1 Properties**
 
-|Name|Description|Type|
-|----|-----------|----|
-|`eins`|Minimum: `1`<br/>Maximum: `512`<br/>|number|
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|**eins**|`number`|Minimum: `1`<br/>Maximum: `512`<br/>||
 
 
 

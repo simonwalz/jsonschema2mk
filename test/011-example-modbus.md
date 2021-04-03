@@ -11,12 +11,12 @@ Modbus Serial Interface
 
 **Properties**
 
-|Name|Description|Type|
-|----|-----------|----|
-|`connect_type` (Connection Type)|Enum: `["RTU","C701","RTUBuffered","AsciiSerial"]`<br/>|string|
-|`connect_path`|i.e. device path<br/>|string|
-|[`connect_options`](#option1connect_options) (Serial Connect Options)||object|
-|[`map`](#definitionsmap) (Modbus devices)||object\[\]|
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|**connect_type**<br/>(Connection Type)|`string`|Enum: `"RTU"`, `"C701"`, `"RTUBuffered"`, `"AsciiSerial"`<br/>||
+|**connect_path**|`string`|i.e. device path<br/>||
+|[**connect_options**](#option1connect_options)<br/>(Serial Connect Options)|`object`|||
+|[**map**](#option1map)<br/>(Modbus devices)|`object[]`|||
 
 **Example**
 
@@ -37,12 +37,12 @@ Modbus Network Interface
 
 **Properties**
 
-|Name|Description|Type|
-|----|-----------|----|
-|`connect_type` (Connection Type)|Enum: `["TCP","Telnet"]`<br/>|string|
-|`connect_path` (Host)|i.e. an IP address or host name<br/>|string|
-|[`connect_options`](#option2connect_options) (Network Connect Options)||object|
-|[`map`](#definitionsmap) (Modbus devices)||object\[\]|
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|**connect_type**<br/>(Connection Type)|`string`|Enum: `"TCP"`, `"Telnet"`<br/>||
+|**connect_path**<br/>(Host)|`string`|i.e. an IP address or host name<br/>||
+|[**connect_options**](#option2connect_options)<br/>(Network Connect Options)|`object`|||
+|[**map**](#option2map)<br/>(Modbus devices)|`object[]`|||
 
 **Example**
 
@@ -62,27 +62,26 @@ Modbus Network Interface
 
 **Properties**
 
-|Name|Description|Type|
-|----|-----------|----|
-|`baudRate` (Baud rate)||number|
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|**baudRate**<br/>(Baud rate)|`number`|||
 
-<a name="definitionsmap"></a>
-## definitions/map: Modbus devices
+<a name="option1map"></a>
+## Option 1: map: Modbus devices
 
 **Items**
 
 **Item Properties**
 
-|Name|Description|Type|
-|----|-----------|----|
-|`node` (Node to map to)||string|
-|`id` (Modbus Client ID)|Minimum: `0`<br/>|number|
-|`address` (Modbus Field Address)|Minimum: `0`<br/>|number|
-|`type` (Modbus Field Type)|Enum: `["input boolean","input register","output boolen","output register"]`<br/>|string|
-|`datatype` (Field Data Type)|Default: `"uint16"`<br/>Enum: `["boolean","uint16"]`<br/>|string|
-|[`metadata`](#definitionsmapmetadata) (Node Metadata)||object|
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|**node**<br/>(Node to map to)|`string`||no|
+|**id**<br/>(Modbus Client ID)|`number`|Minimum: `0`<br/>|yes|
+|**address**<br/>(Modbus Field Address)|`number`|Minimum: `0`<br/>|yes|
+|**type**<br/>(Modbus Field Type)|`string`|Enum: `"input boolean"`, `"input register"`, `"output boolen"`, `"output register"`<br/>|no|
+|**datatype**<br/>(Field Data Type)|`string`|Default: `"uint16"`<br/>Enum: `"boolean"`, `"uint16"`<br/>|yes|
+|[**metadata**](#option1mapmetadata)<br/>(Node Metadata)|`object`||no|
 
-**Item Required Properties:** id,address,datatype<br/>
 **Example**
 
 ```json
@@ -100,8 +99,8 @@ Modbus Network Interface
 ]
 ```
 
-<a name="definitionsmapmetadata"></a>
-### definitions/map\.metadata: Node Metadata
+<a name="option1mapmetadata"></a>
+### Option 1: map\.metadata: Node Metadata
 
 **Additional Properties:** allowed<br/>
 <a name="option2connect_options"></a>
@@ -109,8 +108,45 @@ Modbus Network Interface
 
 **Properties**
 
-|Name|Description|Type|
-|----|-----------|----|
-|`port`||number|
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|**port**|`number`|||
 
+<a name="option2map"></a>
+## Option 2: map: Modbus devices
+
+**Items**
+
+**Item Properties**
+
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|**node**<br/>(Node to map to)|`string`||no|
+|**id**<br/>(Modbus Client ID)|`number`|Minimum: `0`<br/>|yes|
+|**address**<br/>(Modbus Field Address)|`number`|Minimum: `0`<br/>|yes|
+|**type**<br/>(Modbus Field Type)|`string`|Enum: `"input boolean"`, `"input register"`, `"output boolen"`, `"output register"`<br/>|no|
+|**datatype**<br/>(Field Data Type)|`string`|Default: `"uint16"`<br/>Enum: `"boolean"`, `"uint16"`<br/>|yes|
+|[**metadata**](#option2mapmetadata)<br/>(Node Metadata)|`object`||no|
+
+**Example**
+
+```json
+[
+    {
+        "node": "/Lamp Switch",
+        "id": 0,
+        "address": 10,
+        "type": "output boolean",
+        "datatype": "boolean",
+        "metadata": {
+            "power": 60
+        }
+    }
+]
+```
+
+<a name="option2mapmetadata"></a>
+### Option 2: map\.metadata: Node Metadata
+
+**Additional Properties:** allowed<br/>
 

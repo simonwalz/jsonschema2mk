@@ -33,8 +33,22 @@ exports.json = function (string) {
 	return new Handlebars.SafeString(result);
 };
 
+exports.code = function (string) {
+	if (typeof string === "undefined") return "";
+	var result = "`"+
+		string.replace(/(`)/g, "\\$1")+
+		"`";
+	return new Handlebars.SafeString(result);
+};
+
 exports.jsoninline = function (string) {
 	if (typeof string === "undefined") return "";
+	if (Array.isArray(string)) {
+		var result = string.map(function(elem) {
+			return exports.jsoninline(elem);
+		}).join(", ");
+		return new Handlebars.SafeString(result);
+	}
 	var result = "`"+
 		JSON.stringify(string).replace(/(`)/g, "\\$1")+
 		"`";
@@ -94,11 +108,11 @@ exports.pathjoin = function(path, property_name, object) {
 };
 
 exports.jsmk_property = function(property, options) {
+	property = exports.getref(property);
 	var o = {
 		...property,
 		...options.hash,
 	};
-	o = exports.getref(o);
 	if (!Array.isArray(o.examples) || !o.examples.length) {
 		if (typeof o.default !== "undefined") {
 			o.examples = [ o.default ];
@@ -116,6 +130,12 @@ exports.jsmk_property = function(property, options) {
 	if (o.type === "object" || o.type === "array") {
 		exports.push_ref_item(o);
 		o.link = "#"+o.path;
+	}
+
+	if (typeof o.required === "undefined" &&
+			typeof o.parent === "object" && o.parent !== null &&
+			Array.isArray(o.parent.required)) {
+		o.required = o.parent.required.includes(o.name);
 	}
 
 	return o;
