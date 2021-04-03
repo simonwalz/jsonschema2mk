@@ -1,0 +1,56 @@
+<a name="root"></a>
+# Array Item List in Object
+
+This examples show an item list in an object.
+
+
+**Properties**
+
+|Name|Description|Type|
+|----|-----------|----|
+|[`elements`](#elements)||array|
+
+**Additional Properties:** `false`<br/>
+**Example**
+
+```json
+{
+    "elements": [
+        {
+            "eins": 1
+        },
+        "2"
+    ]
+}
+```
+
+<a name="elements"></a>
+## elements\[\]: Elements
+
+
+**Item 1: Element Eins**
+
+**Item 1 Properties**
+
+|Name|Description|Type|
+|----|-----------|----|
+|`eins`|Minimum: `1`<br/>Maximum: `512`<br/>|number|
+
+
+
+**Item 2: Element Zwei**
+
+**Item 2 Type:** string<br/>
+
+**Example**
+
+```json
+[
+    {
+        "eins": 1
+    },
+    "2"
+]
+```
+
+

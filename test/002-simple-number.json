@@ -1,0 +1,9 @@
+{
+	"$schema": "http://json-schema.org/draft/2019-09/schema#",
+	"type": "number",
+	"title": "Settings",
+	"examples": [ 8 ],
+	"minimum": 0,
+	"maximum": 60,
+	"description": "Beschreibung"
+}

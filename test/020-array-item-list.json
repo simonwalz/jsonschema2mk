@@ -1,0 +1,25 @@
+{
+	"type": "array",
+	"title": "Array Item List",
+	"description": "This examples show an item list.",
+	"items": [
+		{
+			"type": "object",
+			"title": "Element Eins",
+			"properties": {
+				"eins": {
+					"title": "Eins",
+					"type": "number",
+					"minimum": 1,
+					"maximum": 512,
+					"examples": [ 1 ]
+				}
+			}
+		},
+		{
+			"type": "string",
+			"title": "Element Zwei",
+			"examples": [ "2" ]
+		}
+	]
+}

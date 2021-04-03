@@ -1,0 +1,9 @@
+{
+	"type": "array",
+	"properties": {
+		"elements": {
+			"ping": true
+		}
+	},
+	"additionalProperties": false
+}

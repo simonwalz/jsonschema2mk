@@ -1,0 +1,128 @@
+{
+	"type": "object",
+	"title": "osiota application modbus",
+	"description": "This application connects devices via Modbus.",
+	"oneOf": [{
+		"description": "Modbus Serial Interface",
+		"properties": {
+			"connect_type": {
+				"title": "Connection Type",
+				"type": "string",
+				"enum": [ "RTU", "C701", "RTUBuffered", "AsciiSerial" ]
+			},
+			"connect_path": {
+				"type": "string",
+				"title": "Connect Path",
+				"description": "i.e. device path"
+			},
+			"connect_options": {
+				"title": "Serial Connect Options",
+				"type": "object",
+				"properties": {
+					"baudRate": {
+						"title": "Baud rate",
+						"type": "number"
+					}
+				}
+			},
+			"map": {
+				"$ref": "#/definitions/map"
+			}
+		},
+		"examples": [{
+			"connect_type": "RTUBuffered",
+			"connect_path": "/dev/ttyUSB0",
+			"connect_options": {
+				"baudRate": 9600
+			}
+		}]
+	},{
+		"description": "Modbus Network Interface",
+		"properties": {
+			"connect_type": {
+				"title": "Connection Type",
+				"type": "string",
+				"enum": [ "TCP", "Telnet" ]
+			},
+			"connect_path": {
+				"type": "string",
+				"title": "Host",
+				"description": "i.e. an IP address or host name"
+			},
+			"connect_options": {
+				"title": "Network Connect Options",
+				"type": "object",
+				"properties": {
+					"port": {
+						"title": "Port",
+						"type": "number"
+					}
+				}
+			},
+			"map": {
+				"$ref": "#/definitions/map"
+			}
+		},
+		"examples": [{
+			"connect_type": "Telnet",
+			"connect_path": "192.168.1.101",
+			"connect_options": {
+				"port": 1234
+			}
+		}]
+	}],
+	"additionalProperties": false,
+	"definitions": {
+		"map": {
+			"type": "array",
+			"format": "tabs",
+			"title": "Modbus devices",
+			"items": {
+				"type": "object",
+				"properties": {
+					"node": {
+						"title": "Node to map to",
+						"type": "string"
+					},
+					"id": {
+						"title": "Modbus Client ID",
+						"type": "number",
+						"minimum": 0
+					},
+					"address": {
+						"title": "Modbus Field Address",
+						"type": "number",
+						"minimum": 0
+					},
+					"type": {
+						"title": "Modbus Field Type",
+						"type": "string",
+						"enum": [ "input boolean", "input register", "output boolen", "output register" ]
+					},
+					"datatype": {
+						"title": "Field Data Type",
+						"type": "string",
+						"enum": ["boolean", "uint16"],
+						"default": "uint16"
+					},
+					"metadata": {
+						"title": "Node Metadata",
+						"type": "object",
+						"additionalProperties": true
+					}
+				},
+				"examples": [{
+					"node": "/Lamp Switch",
+					"id": 0,
+					"address": 10,
+					"type": "output boolean",
+					"datatype": "boolean",
+					"metadata": {
+						"power": 60
+					}
+				}],
+				"required": [ "id", "address", "datatype" ]
+			}
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+	"type": "object",
+	"title": "osiota application artnet",
+	"description": "This application allows controlling lights over the Art-Net protocol.",
+	"properties": {
+		"host": {
+			"title": "Host",
+			"type": "string",
+			"default": "255.255.255.255",
+			"examples": [ "192.0.2.42" ]
+		},
+		"port": {
+			"title": "Port",
+			"type": "number",
+			"default": 6454
+		},
+		"refresh_rate": {
+			"title": "Refresh Rate",
+			"description": "in ms",
+			"type": "number",
+			"default": 4000
+		},
+		"universe": {
+			"type": "number",
+			"title": "ArtNet universe",
+			"examples": [ 0 ]
+		},
+		"iface": {
+			"type": "string",
+			"title": "Interface",
+			"description": "Interface to bind the Art-Net socket to",
+			"examples": [ "eth0" ]
+		},
+		"map": {
+			"type": "array",
+			"title": "DMX channels",
+			"items": {
+				"type": "object",
+				"title": "DMX channel",
+				"properties": {
+					"channel": {
+						"title": "Channel",
+						"type": "number",
+						"minimum": 1,
+						"maximum": 512,
+						"examples": [ 1 ]
+					},
+					"node": {
+						"title": "Node Name",
+						"type": "string",
+						"examples": [ "/my-artnet-channel" ]
+					},
+					"default_value": {
+						"title": "Default Value",
+						"type": "number",
+						"minimum": 0,
+						"maximum": 255,
+						"examples": [ 63 ]
+					}
+				},
+				"additionalProperties": false
+			}
+		}
+	},
+	"additionalProperties": false
+}
