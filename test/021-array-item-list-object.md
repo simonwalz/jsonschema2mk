@@ -10,7 +10,7 @@ This examples show an item list in an object.
 |----|-----------|----|
 |[`elements`](#elements)||array|
 
-**Additional Properties:** `false`<br/>
+**Additional Properties:** not allowed<br/>
 **Example**
 
 ```json
