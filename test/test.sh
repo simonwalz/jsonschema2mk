@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd test/
+cd test/ 2>/dev/null
 
 for i in *.json
 do
