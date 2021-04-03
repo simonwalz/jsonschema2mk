@@ -1,4 +1,18 @@
 {{#if (isdefined items)~}}
+{{#if (equal (type items) "array")}}
+{{#each items}}
+
+**Item {{plus @key 1}}{{#if title}}: {{title}}{{/if}}**
+
+{{#if (or description deprecated)}}
+
+{{#if deprecated}}(DEPRECATED) {{/if}}{{{description}}}
+
+{{/if~}}
+
+{{> type . path=(pathjoin path @key .) prefix_text=(plus "Item " (plus (plus @key 1) " "))~}}
+{{/each~}}
+{{else~}}
 **Items{{#if items.title}}: {{items.title}}{{/if}}**
 
 {{#if (or items.description items.deprecated)}}
@@ -7,9 +21,11 @@
 
 {{/if~}}
 
-{{> type items path=(pathjoin path "" .) prefix_text="Item "}}
+{{> type items path=(pathjoin path "" .) prefix_text="Item "~}}
+{{/if~}}
 
-{{#if (isdefined minItems)}}
+
+{{~#if (isdefined minItems)}}
 **Minimum Items:** {{escape minItems}}<br/>
 {{/if~}}
 {{#if (isdefined maxItems)}}
@@ -30,7 +46,7 @@
 
 {{/if~}}
 
-{{> type contains path=(pathjoin path "" .) prefix_text="Contains Item "}}
+{{> type contains path=(pathjoin path "" .) prefix_text="Contains Item "~}}
 
 {{#if (isdefined minContains)}}
 **Minimum Contains:** {{escape minContains}}<br/>

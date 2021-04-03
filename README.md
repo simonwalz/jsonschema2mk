@@ -25,25 +25,22 @@ This project allows to generate documentation from [json-schema](https://json-sc
     * additionalProperties (as boolean and as object)
     * patternProperties
     * required
-    * maxProperties
-    * minProperties
+    * minProperties, maxProperties
+    * propertyNames.pattern
   * array
-    * items
-    * maxItems
-    * minItems
+    * items (schema)
+    * items (array of schemas)
+    * minItems, maxItems
     * uniqueItems
     * contains
-    * maxContains
-    * minContains
+    * minContains, maxContains
   * allOf, oneOf, anyOf, not
 
 
-### Unsupported JSON schema features
+### Missing JSON schema features
 
   * if, then, else
-  * object, propertyNames.pattern
-  * object, dependencies (Pattern and Schema)
-  * array, items: multiple items
+  * object: dependencies (Properties and Schema)
 
 
 ## Install & Usage

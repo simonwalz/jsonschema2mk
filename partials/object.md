@@ -42,3 +42,6 @@
 {{#if (isdefined maxProperties)}}
 **{{prefix_text}}Maximal Properties:** {{escape maxProperties}}<br/>
 {{/if~}}
+{{#if (and (isdefined propertyNames) (isdefined propertyNames.pattern))}}
+**{{prefix_text}}Property Name Pattern:** {{jsoninline propertyNames.pattern}}<br/>
+{{/if~}}
