@@ -35,6 +35,7 @@ This project allows to generate documentation from [json-schema](https://json-sc
     * contains
     * minContains, maxContains
   * allOf, oneOf, anyOf, not
+  * multiple types (`type: ["string", "null"]`)
 
 
 ### Missing JSON schema features

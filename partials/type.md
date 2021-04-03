@@ -1,7 +1,7 @@
-{{#if (equal type "object") ~}}
+{{#if (is_type type "object") ~}}
 {{> object . ~}}
 {{~else~}}
-{{#if (equal type "array") ~}}
+{{#if (is_type type "array") ~}}
 {{> array . ~}}
 {{~else~}}
 {{> simple ~}}

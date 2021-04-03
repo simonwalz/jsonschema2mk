@@ -1,12 +1,12 @@
 |
-	{{~#mylink .}}**{{name}}**{{/mylink ~}}
-	{{#if (and title (title_isnot_name .))}}<br/>({{title}}){{/if ~}}
+	{{~#mylink .}}**{{escape name}}**{{/mylink ~}}
+	{{#if (and title (title_isnot_name .))}}<br/>({{escape title}}){{/if ~}}
 |
 	{{~code display_type ~}}
 |
 	{{~#if deprecated}}(DEPRECATED)<br/>{{/if}}
 	{{~#if description ~}}
-	{{{description}}}<br/>{{/if ~}}
+	{{firstline description .}}<br/>{{/if ~}}
 	{{>extra_inline . ~}}
 |
 	{{~#if (isdefined required)}}{{#if required}}yes{{else}}no{{/if}}{{/if~}}

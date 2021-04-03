@@ -1,4 +1,4 @@
 {{~#if (isdefined type)}}
-**{{prefix_text}}Type:** {{escape type}}<br/>
+**{{prefix_text}}Type:** {{code type}}<br/>
 {{/if}}
 {{> extra .}}

@@ -22,7 +22,7 @@ exports.isdefined = function(value) {
 exports.escape = function(text) {
 	if (typeof text === "undefined" || text === null) return "";
 	var result = text.toString()
-		.replace(/([\\`*_{}\[\]()#+.!-])/g, '\\$1');
+		.replace(/([\|\\`*_{}\[\]()#+.!-])/g, '\\$1');
 	return new Handlebars.SafeString(result);
 };
 
@@ -35,9 +35,13 @@ exports.json = function (string) {
 
 exports.code = function (string) {
 	if (typeof string === "undefined") return "";
-	var result = "`"+
-		string.replace(/(`)/g, "\\$1")+
-		"`";
+	if (!Array.isArray(string))
+		string = [ string ];
+	var result = string.map(function(s) {
+		return "`"+
+			s.toString().replace(/(`)/g, "\\$1")+
+			"`";
+	}).join(", ");
 	return new Handlebars.SafeString(result);
 };
 
@@ -93,7 +97,7 @@ exports.pathjoinobj = function(path, property_name, object) {
 	} else {
 		path = (path ? path+"." : "") + property_name;
 	}
-	path = path + (object.type === "array" ? "[]" : "");
+	path = path + (exports.is_type(object.type, "array") ? "[]" : "");
 	// dont increment level on oneOf, anyOf, allOf, not:
 	return path.replace(/: \./, ": ");
 }
@@ -119,7 +123,7 @@ exports.jsmk_property = function(property, options) {
 		}
 	}
 	o.display_type = o.type;
-	if (o.type === "array") {
+	if (exports.is_type(o.type, "array")) {
 		o.display_type = "array";
 		if (typeof o.items === "object" && o.items !== null &&
 				typeof o.items.type === "string") {
@@ -127,7 +131,8 @@ exports.jsmk_property = function(property, options) {
 		}
 	}
 
-	if (o.type === "object" || o.type === "array") {
+	if (exports.is_type(o.type, "object") ||
+			exports.is_type(o.type, "array")) {
 		exports.push_ref_item(o);
 		o.link = "#"+o.path;
 	}
@@ -160,13 +165,6 @@ exports.push_ref_item = function(item) {
 };
 
 exports.mylink = function(object, options) {
-	/*
-	if (object.type === "object" || object.type === "array") {
-		exports.push_ref_item(object);
-		return new Handlebars.SafeString(
-			"["+options.fn(object)+"](#"+object.path+")");
-	}*/
-
 	if (object.link) {
 		var link = exports.tolink(object.link);
 		return new Handlebars.SafeString(
@@ -211,7 +209,8 @@ exports.getref = function(object) {
 };
 
 exports.noproperties = function(object) {
-	if (object.type !== "object" && object.type !== "array")
+	if (!exports.is_type(object.type, "object") &&
+			!exports.is_type(object.type, "array"))
 		return false;
 	if (exports.length(object.properties) ||
 			exports.length(object.patternProperties) ||
@@ -243,4 +242,22 @@ exports.title_isnot_name = function(object) {
 	if (name === title_camelcase_lower) return false;
 	if (name === title_camelcase_upper) return false;
 	return true;
+};
+
+exports.firstline = function(string, object) {
+	if (object.link) {
+		var result = string.toString()
+			.replace(/(?:\n|<br\/>)(?:.|\n)*$/, "")
+			.replace(/([\|])/g, '\\$1');
+		return new Handlebars.SafeString(result);
+	}
+	var result = string.toString().replace(/\n/g, "<br/>")
+			.replace(/([\|])/g, '\\$1');
+	return new Handlebars.SafeString(result);
+};
+
+exports.is_type = function(type, pattern) {
+	if (Array.isArray(type))
+		return type.includes(pattern);
+	return type === pattern;
 };

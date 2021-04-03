@@ -4,7 +4,7 @@
 {{~#if (isdefined const)~}}
 **{{prefix_text}}Constant Value:** {{jsoninline const}}<br/>
 {{/if}}
-{{~#if (equal type "string") ~}}
+{{~#if (is_type type "string") ~}}
 	{{~#if (isdefined contentMediaType)~}}
 **{{prefix_text}}Content Media Type:** {{jsoninline contentMediaType}}<br/>
 {{/if}}
@@ -24,7 +24,7 @@
 **{{prefix_text}}Pattern:** {{escape pattern}}<br/>
 {{/if}}
 {{~/if}}
-{{~#if (or (equal type "number") (equal type "integer"))~}}
+{{~#if (or (is_type type "number") (is_type type "integer"))~}}
 	{{~#if (isdefined exclusiveMinimum)~}}
 **{{prefix_text}}Minimum (exclusive):** {{jsoninline exclusiveMinimum}}<br/>
 {{/if}}
