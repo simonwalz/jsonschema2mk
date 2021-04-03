@@ -10,7 +10,8 @@
 
 {{/if~}}
 
-{{> type . path=(pathjoin path @key .) prefix_text=(plus "Item " (plus (plus @key 1) " "))~}}
+{{> type . path=(pathjoin path @key .) prefix_text=(plus "Item " (plus (plus @key 1) " "))}}
+
 {{/each~}}
 {{else~}}
 **Items{{#if items.title}}: {{items.title}}{{/if}}**

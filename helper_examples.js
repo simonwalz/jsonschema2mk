@@ -26,8 +26,19 @@ var merge_examples = function(item) {
 		return merge_examples_object(item.properties);
 	}
 	if (item.type === "array") {
-		var e = merge_examples(item.items);
-		if (e) return [e];
+		if (Array.isArray(item.items)) {
+			var e = [];
+			item.items.forEach(function(itemelement, i) {
+				var e_i = merge_examples(itemelement);
+				if (e_i !== undefined)
+					e[i] = e_i;
+			});
+			if (e.length) return e;
+		} else if (typeof item.items === "object" &&
+				item.items !== null) {
+			var e = merge_examples(item.items);
+			if (e !== undefined) return [e];
+		}
 	}
 	return undefined;
 };

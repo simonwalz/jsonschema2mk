@@ -106,7 +106,11 @@ exports.jsmk_property = function(property, options) {
 	}
 	o.display_type = o.type;
 	if (o.type === "array") {
-		o.display_type = o.items.type + "[]";
+		o.display_type = "array";
+		if (typeof o.items === "object" && o.items !== null &&
+				typeof o.items.type === "string") {
+			o.display_type = o.items.type + "[]";
+		}
 	}
 
 	if (o.type === "object" || o.type === "array") {
@@ -160,8 +164,14 @@ exports.plus = function(a, b) {
 };
 
 exports.length = function(object) {
+	if (Array.isArray(object)) {
+		return object.length;
+	}
 	if (typeof object === "object" && object !== null) {
 		return Object.keys(object).length;
+	}
+	if (typeof object !== "undefined") {
+		return true;
 	}
 	return false;
 };
@@ -181,11 +191,14 @@ exports.getref = function(object) {
 };
 
 exports.noproperties = function(object) {
+	if (object.type !== "object" && object.type !== "array")
+		return false;
 	if (exports.length(object.properties) ||
 			exports.length(object.patternProperties) ||
 			exports.length(object.additionalProperties) ||
 			object.additionalProperties === true ||
 			exports.length(object.items) ||
+			exports.length(object.contains) ||
 			exports.length(object.oneOf) ||
 			exports.length(object.anyOf) ||
 			exports.length(object.allOf) ||

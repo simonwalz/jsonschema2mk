@@ -15,7 +15,7 @@
     "url": "https://github.com/simonwalz/jsonschema2mk.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./test/test.sh"
   },
   "author": "Simon Walz",
   "license": "MIT"
