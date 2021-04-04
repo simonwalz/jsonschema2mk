@@ -13,9 +13,9 @@ Modbus Serial Interface
 
 |Name|Type|Description|Required|
 |----|----|-----------|--------|
-|**connect_type**<br/>(Connection Type)|`string`|Enum: `"RTU"`, `"C701"`, `"RTUBuffered"`, `"AsciiSerial"`<br/>||
-|**connect_path**|`string`|i.e. device path<br/>||
-|[**connect_options**](#option1connect_options)<br/>(Serial Connect Options)|`object`|||
+|**connect\_type**<br/>(Connection Type)|`string`|Enum: `"RTU"`, `"C701"`, `"RTUBuffered"`, `"AsciiSerial"`<br/>||
+|**connect\_path**|`string`|i.e. device path<br/>||
+|[**connect\_options**](#option1connect_options)<br/>(Serial Connect Options)|`object`|||
 |[**map**](#option1map)<br/>(Modbus devices)|`object[]`|||
 
 **Example**
@@ -39,9 +39,9 @@ Modbus Network Interface
 
 |Name|Type|Description|Required|
 |----|----|-----------|--------|
-|**connect_type**<br/>(Connection Type)|`string`|Enum: `"TCP"`, `"Telnet"`<br/>||
-|**connect_path**<br/>(Host)|`string`|i.e. an IP address or host name<br/>||
-|[**connect_options**](#option2connect_options)<br/>(Network Connect Options)|`object`|||
+|**connect\_type**<br/>(Connection Type)|`string`|Enum: `"TCP"`, `"Telnet"`<br/>||
+|**connect\_path**<br/>(Host)|`string`|i.e. an IP address or host name<br/>||
+|[**connect\_options**](#option2connect_options)<br/>(Network Connect Options)|`object`|||
 |[**map**](#option2map)<br/>(Modbus devices)|`object[]`|||
 
 **Example**

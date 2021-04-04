@@ -10,7 +10,7 @@ This application allows controlling lights over the Art-Net protocol.
 |----|----|-----------|--------|
 |**host**|`string`|Default: `"255.255.255.255"`<br/>||
 |**port**|`number`|Default: `6454`<br/>||
-|**refresh_rate**|`number`|in ms<br/>Default: `4000`<br/>||
+|**refresh\_rate**|`number`|in ms<br/>Default: `4000`<br/>||
 |**universe**<br/>(ArtNet universe)|`number`|||
 |**iface**<br/>(Interface)|`string`|Interface to bind the Art-Net socket to<br/>||
 |[**map**](#map)<br/>(DMX channels)|`object[]`|||
@@ -46,7 +46,7 @@ This application allows controlling lights over the Art-Net protocol.
 |----|----|-----------|--------|
 |**channel**|`number`|Minimum: `1`<br/>Maximum: `512`<br/>||
 |**node**<br/>(Node Name)|`string`|||
-|**default_value**|`number`|Minimum: `0`<br/>Maximum: `255`<br/>||
+|**default\_value**|`number`|Minimum: `0`<br/>Maximum: `255`<br/>||
 
 **Item Additional Properties:** not allowed<br/>
 **Example**

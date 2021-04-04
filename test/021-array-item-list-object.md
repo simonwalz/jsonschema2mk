@@ -40,7 +40,7 @@ This examples show an item list in an object.
 
 **Item 2: Element Zwei**
 
-**Item 2 Type:** string<br/>
+**Item 2 Type:** `string`<br/>
 
 **Example**
 

@@ -4,7 +4,7 @@
 Beschreibung
 
 
-**Type:** string<br/>
+**Type:** `string`<br/>
 **Example**
 
 ```json
