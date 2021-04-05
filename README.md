@@ -2,6 +2,10 @@
 
 This project allows to generate documentation from [json-schema](https://json-schema.org).
 
+Examples:
+
+  * [Configuration osiota ArtNet app](test/010-example-artnet.md) ([see project](https://github.com/osiota/osiota-app-artnet/blob/master/README.md))
+  * [Configuration osiota Modbus app](test/011-example-modbus.md) ([see project](https://github.com/osiota/osiota-app-modbus/blob/master/README.md))
 
 ### Supported JSON schema features
 
@@ -9,6 +13,7 @@ This project allows to generate documentation from [json-schema](https://json-sc
     * title, description, default, examples
     * enum, const
     * deprecated
+    * $ref locally
   * number, integer
     * minimum, maximum, exclusiveMinimum, exclusiveMaximum
     * multipleOf
@@ -34,7 +39,7 @@ This project allows to generate documentation from [json-schema](https://json-sc
     * uniqueItems
     * contains
     * minContains, maxContains
-  * allOf, oneOf, anyOf, not
+  * allOf, oneOf, anyOf, not (not for object properties)
   * multiple types (`type: ["string", "null"]`)
 
 
