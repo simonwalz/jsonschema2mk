@@ -1,6 +1,6 @@
 # JSON schema to markdown generator (jsonschema2mk)
 
-This project allows to generate documentation from [json-schema](https://json-schema.org).
+This project allows to generate documentation from [JSON Schema](https://json-schema.org) spezifications.
 
 Examples:
 
