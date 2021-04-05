@@ -198,9 +198,14 @@ exports.getref = function(object) {
 	if (typeof object['$ref'] === "string") {
 		var o = exports.data.schema;
 		var path = object['$ref'].replace(/^#\//, '');
-		path.split(/\//)
-				.forEach(function(p) {
-			o = o[p];
+		path.split(/\//).forEach(function(p) {
+			if (o.hasOwnProperty(p) &&
+					typeof o[p] === "object" &&
+					o[p] !== null) {
+				o = o[p];
+			} else {
+				throw new Error("ref not found.");
+			}
 		});
 		o.path = path;
 		return o;
