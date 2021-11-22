@@ -15,6 +15,11 @@
 {{> object_property (jsmk_property . path=(pathjoinobj ../path @key .) parent=.. name=@key)}}
 {{/each}}
 
+{{#each patternProperties ~}}
+{{> element . ~}}
+{{/each}}
+
+
 {{/if}}
 {{#if (isdefined additionalProperties)}}
 {{#if (equal (type additionalProperties) "boolean")}}

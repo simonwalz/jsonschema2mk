@@ -7,6 +7,10 @@
 {{> simple ~}}
 {{/if ~}}
 {{/if ~}}
+{{#if $ref ~}} Reference to [{{escape $ref}}]({{escape $ref}}) {{/if ~}} 
+
+
+
 
 {{#each oneOf}}
 <br>**Option {{plus @key 1}} (alternative):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": ")))}}

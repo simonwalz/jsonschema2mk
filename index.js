@@ -31,6 +31,7 @@ var jsonschema2mk = function(options) {
 		require(options.plugin)(this.data, this);
 	}
 };
+
 jsonschema2mk.prototype.load_partial_dir = function(dir) {
 	var _this = this;
 	var partial_files = fs.readdirSync(dir);
@@ -41,6 +42,7 @@ jsonschema2mk.prototype.load_partial_dir = function(dir) {
 		);
 	});
 };
+
 jsonschema2mk.prototype.generate = function() {
 	if (!this._generate) {
 		this._generate = this.Handlebars.compile("{{> main}}");

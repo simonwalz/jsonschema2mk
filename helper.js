@@ -266,3 +266,6 @@ exports.is_type = function(type, pattern) {
 		return type.includes(pattern);
 	return type === pattern;
 };
+
+
+exports.get_definitions = item => item.schema.definitions || []
