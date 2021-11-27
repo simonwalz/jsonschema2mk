@@ -1,4 +1,18 @@
 var Handlebars = require('handlebars');
+let {deepFilter} = require("./utils")
+
+
+exports.subschemas = node => {
+	// console.log(node)
+	let nodes = deepFilter(node, n => n.subschema)
+	let res = {}
+	nodes.forEach( node => {
+		res[node.instance.subschema] = node.instance 
+	})
+	return res
+}
+
+exports.anchorref = anchor => "#"+anchor.replace(/[\.\-\/]/gm,"") 
 
 exports.or = function(a, b) {
 	return a || b;

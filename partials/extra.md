@@ -1,3 +1,4 @@
+
 {{~#if (isdefined enum)~}}
 **{{prefix_text}}Enum:** {{jsoninline enum}}<br/>
 {{/if}}

@@ -1,11 +1,13 @@
 |
-	{{~#mylink .}}**{{escape name}}**{{/mylink ~}}
-	{{#if (and title (title_isnot_name .))}}<br/>({{escape title}}){{/if ~}}
+	{{~#if true}}**{{escape name}}**{{/if~}}
 |
 	{{~code display_type ~}}
 |
 	{{~#if deprecated}}(DEPRECATED)<br/>{{/if}}
 	{{~#if description ~}}
+    {{title}}.
+    {{~/if~}}
+    {{~#if description ~}}
 	{{firstline description .}}<br/>{{/if ~}}
 	{{>extra_inline . ~}}
 |

@@ -5,7 +5,9 @@
   "main": "index.js",
   "bin": "cli.js",
   "dependencies": {
+    "deep-extend": "^0.6.0",
     "handlebars": "^4.7.6",
+    "lodash": "^4.17.21",
     "minimist": "^1.2.5"
   },
   "devDependencies": {},
