@@ -1,3 +1,4 @@
+{{~#if (isdefined subschema)}}{{prefix_text}}Subschema: [{{escape (or title subschema)}}]({{anchorref subschema}})<br/>{{~/if}}
 {{~#if (isdefined default)}}{{prefix_text}}Default: {{jsoninline default}}<br/>{{~/if}}
 {{~#if (isdefined enum)}}{{prefix_text}}Enum: {{jsoninline enum}}<br/>{{~/if}}
 {{~#if (isdefined const)}}{{prefix_text}}Constant Value: {{jsoninline const}}<br/>{{~/if}}

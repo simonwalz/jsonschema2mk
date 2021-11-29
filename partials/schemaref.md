@@ -1,8 +1,8 @@
-{{mdlevel path}} {{escape path}} {{~#if title~}} ({{title}}) {{~/if}}
-
+{{mdlevel path}} {{escape path}} ({{title}})
 
 **Description**: {{#if (or description deprecated)}}
 {{#if deprecated}}(DEPRECATED) {{/if}}{{{description}}}
 
 {{/if}}
-{{> type . ~}}
+Reference [{{subschema}}]({{anchorref subschema}})
+

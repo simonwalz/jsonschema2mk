@@ -4,7 +4,7 @@
 {{#if (is_type type "array") ~}}
 {{> array . ~}}
 {{~else~}}
-{{> simple ~}}
+{{> simple key=@key ~}}
 {{/if ~}}
 {{/if ~}}
 {{#if title ~}} 
@@ -15,25 +15,47 @@
 {{#if description ~}}
     <br/>
      Description: {{escape description}} 
-    <br/>{{/if ~}}
+    <br/>
+{{/if ~}}
 {{#if $ref ~}} 
-    <br/>
     Reference to [{{escape $ref}}]({{escape $ref}}) 
-    <br/>
-{{/if ~}} 
+{{/if}} 
 
 {{#each oneOf}}
-<br>**Option {{plus @index 1}} (alternative):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @index 1) ": ")))}}
+- **Option {{plus @key 1}} (alternative):** 
+    {{~#if subschema~}}
+    {{> schemaref_part . path=(pathjoinobj ../path @key . ) ~}}
+    {{~else~}}
+    {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": ")))}}
+    {{~/if~}}
 {{/each}}
+
 {{#each anyOf}}
-<br>**Option {{plus @key 1}} (optional):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) "]: ")))}}
+- **Option {{plus @key 1}} (optional):**  
+    {{~#if subschema~}}
+    {{> schemaref_part . path=(pathjoinobj ../path @key . ) ~}}
+    {{~else~}}
+    {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": ")))}}
+    {{~/if~}}
 {{/each}}
+
 {{#each allOf}}
-<br>{{> element_part . type=(or type ../type) path=(pathjoin path @key)}}
+-  {{~#if subschema~}}
+    {{> schemaref_part . path=(pathjoinobj ../path @key . ) ~}}
+    {{~else~}}
+    {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": ")))}}
+    {{~/if~}}
 {{/each}}
+
 {{#each not}}
-<br>**Not [{{plus @key 1}}]:** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "not[" (plus (plus @key 1) "]: ")))}}
+- **Not [{{plus @key 1}}]:**  
+    {{~#if subschema~}}
+    {{> schemaref_part . path=(pathjoinobj ../path @key . ) ~}}
+    {{~else~}}
+    {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": ")))}}
+    {{~/if~}}
 {{/each}}
+
 {{#if (noproperties .)}}
 **No properties.**
 {{/if}}
