@@ -7,13 +7,23 @@
 {{> simple ~}}
 {{/if ~}}
 {{/if ~}}
-{{#if $ref ~}} Reference to [{{escape $ref}}]({{escape $ref}}) {{/if ~}} 
-
-
-
+{{#if title ~}} 
+    <br/>
+    {{escape title}} 
+    <br/>
+{{/if ~}}
+{{#if description ~}}
+    <br/>
+     Description: {{escape description}} 
+    <br/>{{/if ~}}
+{{#if $ref ~}} 
+    <br/>
+    Reference to [{{escape $ref}}]({{escape $ref}}) 
+    <br/>
+{{/if ~}} 
 
 {{#each oneOf}}
-<br>**Option {{plus @key 1}} (alternative):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": ")))}}
+<br>**Option {{plus @index 1}} (alternative):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @index 1) ": ")))}}
 {{/each}}
 {{#each anyOf}}
 <br>**Option {{plus @key 1}} (optional):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) "]: ")))}}
