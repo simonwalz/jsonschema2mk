@@ -219,14 +219,14 @@ exports.noproperties = function(object) {
 		return false;
 	if (exports.length(object.properties) ||
 			exports.length(object.patternProperties) ||
-			exports.length(object.additionalProperties) ||
+			( exports.length(object.additionalProperties) &&
+			  object.additionalProperties !== false ) ||
 			object.additionalProperties === true ||
 			exports.length(object.items) ||
 			exports.length(object.contains) ||
 			exports.length(object.oneOf) ||
 			exports.length(object.anyOf) ||
-			exports.length(object.allOf) ||
-			exports.length(object.not)) {
+			exports.length(object.allOf)) {
 		return false;
 	}
 	return true;
