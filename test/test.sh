@@ -11,7 +11,8 @@ done
 
 if test "x$(git status -s *.md)" != "x"
 then
-	echo "Error: Generated Files have changed!" 2>&1
+	echo "Error: Generated files changed!" 2>&1
+	echo "If the change was intended, commit the changed files and rerun the test" 2>&1
 	exit 1
 fi
 
