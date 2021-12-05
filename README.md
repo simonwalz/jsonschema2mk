@@ -61,13 +61,15 @@ Generate DOC.md:
 npx jsonschema2mk --schema schema.json >DOC.md
 ```
 
-Add partials:
+Overwrite some partials with own partials:
 
 ```sh
 npx jsonschema2mk --schema schema.json --partials dir/ >DOC.md
 ```
 
-## Add to package.json
+## Add to your project
+
+Add to package.json:
 
 ```json
 {
@@ -77,9 +79,13 @@ npx jsonschema2mk --schema schema.json --partials dir/ >DOC.md
 }
 ```
 
-## Plugins:
+and run `npm run doc`.
 
-Example to add partials:
+## Plugins
+
+If partial overwriting is not enogh (see above), you can load plugins.
+
+In the plugin, you can load your own partials:
 
 ```js
 const fs = require("fs");
@@ -89,11 +95,11 @@ module.exports = function(data, jsonschema2mk) {
 };
 ```
 
-## Use as lib:
+## Usage as Libray
 
-See `cli.js`
+You can integration this code as Library. See `cli.js` for an example.
 
-## Examples:
+## Examples
 
 The README.md files of all applications of the [osiota project](https://github.com/osiota/) are generated with the help of this program. See the adaption script in the [osiota-dev repository](https://github.com/osiota/osiota-dev/blob/master/doc-jsonschema) as well.
 
