@@ -6,9 +6,9 @@
   "bin": "cli.js",
   "dependencies": {
     "handlebars": "^4.7.7",
+    "js-yaml": "^4.1.0",
     "minimist": "^1.2.6"
   },
-  "devDependencies": {},
   "homepage": "https://github.com/simonwalz/jsonschema2mk",
   "repository": {
     "type": "git",

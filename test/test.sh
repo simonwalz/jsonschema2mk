@@ -9,6 +9,8 @@ do
 	../cli.js --schema "$i" >"${mdfilename}"
 done
 
+../cli.js --schema "010-example-artnet.json" --extension yaml-examples >010-example-artnet-yaml.md
+
 if test "x$(git status -s *.md)" != "x"
 then
 	echo "Error: Generated files changed!" 2>&1
