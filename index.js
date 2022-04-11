@@ -4,6 +4,8 @@ const fs = require('fs');
 const path = require('path');
 
 var jsonschema2mk = function(options) {
+	var _this = this;
+
 	// TODO: copy structure:
 	this.Helper = require('./helper.js');
 	this.Handlebars = require('handlebars').create();
@@ -12,9 +14,6 @@ var jsonschema2mk = function(options) {
 	this.Handlebars.registerHelper(require('./helper_examples.js'));
 
 	this.load_partial_dir(__dirname + "/partials/");
-	if (options.partials) {
-		this.load_partial_dir(options.partials);
-	}
 
 	this.data = {
 		schema: JSON.parse(fs.readFileSync(
@@ -27,8 +26,39 @@ var jsonschema2mk = function(options) {
 	}
 	this.Helper.data = this.data;
 
+	// Load internal extensions:
+	if (options.extension) {
+		if (!Array.isArray(options.extension)) {
+			options.extension = [ options.extension ];
+		}
+		options.extension.forEach(function(extension) {
+			if (typeof extension !== "string" ||
+					!extension.match(/^[a-z0-9_-]+$/g)) {
+				throw new Error("not a valid extension name");
+			}
+			require('./extensions/'+extension+'.js')(
+					_this.data, _this);
+		});
+	}
+
+	// Load external plugins:
 	if (options.plugin) {
-		require(options.plugin)(this.data, this);
+		if (!Array.isArray(options.plugin)) {
+			options.plugin = [ options.plugin ];
+		}
+		options.plugin.forEach(function(plugin) {
+			require(""+plugin)(this.data, this);
+		});
+	}
+
+	// Load user defined partials
+	if (options.partials) {
+		if (!Array.isArray(options.partials)) {
+			options.partials = [ options.partials ];
+		}
+		options.partials.forEach(function(partials) {
+			this.load_partial_dir(partials);
+		});
 	}
 };
 jsonschema2mk.prototype.load_partial_dir = function(dir) {

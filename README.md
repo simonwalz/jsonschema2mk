@@ -81,19 +81,85 @@ Add to package.json:
 
 and run `npm run doc`.
 
-## Plugins
+## Command line options
+
+Usage:
+
+```sh
+npx jsonschema2mk [<options>] >DOC.md
+```
+
+<table>
+  <thead>
+  <tr>
+    <th>Option</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><code>--schema schema.json</code></td>
+    <td>Specify a JSON Schema file to convert.<br/>Default: <code>schema.json</code></td>
+  </tr>
+  <tr>
+    <td><code>--partials dir</code></td>
+    <td>Overwrite partials from dir. You can overwrite every partial (see directory partials/) or define own ones. This option can be used multiple times.</td>
+  </tr>
+  <tr>
+    <td><code>--extension ext</code></td>
+    <td>Load feature extension. See <a href="#internal-feature-extensions-option-extension">section</a>. This option can be used multiple times.</td>
+  </tr>
+  <tr>
+    <td><code>--plugin p</code></td>
+    <td>Load plugin. See <a href="#load-external-plugins">section</a>. This option can be used multiple times.</td>
+  </tr>
+  <tr>
+    <td><code>--level number</code></td>
+    <td>Initial Markdown heading level. Defaul is Zero.</td>
+  </tr>
+  </tbody>
+</table>
+
+
+### Internal Feature Extensions (Option extension)
+
+You can load feature extensions if needed.
+
+Implemented Extensions:
+
+  * `yaml-examples`: Show examples in YAML format.
+
+Example Call:
+
+```sh
+npx jsonschema2mk --schema schema.json --extension yaml-examples --extension abc >DOC.md
+```
+
+
+### Load External Plugins (Option plugin)
 
 If partial overwriting is not enogh (see above), you can load plugins.
 
-In the plugin, you can load your own partials:
+In the plugin, you can load your own partials. It has the same API as extensions.
+
+The Arguments Vector is available via `data.argv`.
+
+Example:
 
 ```js
-const fs = require("fs");
-
 module.exports = function(data, jsonschema2mk) {
 	jsonschema2mk.load_partial_dir(__dirname + "/partials");
 };
 ```
+
+
+Call it via:
+
+```sh
+npx jsonschema2mk --schema schema.json --plugin my-plugin.js >DOC.md
+```
+
+
 
 ## Usage as Libray
 
