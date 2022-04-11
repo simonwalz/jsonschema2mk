@@ -111,7 +111,7 @@ npx jsonschema2mk [<options>] >DOC.md
   </tr>
   <tr>
     <td><code>--plugin p</code></td>
-    <td>Load plugin. See <a href="#load-external-plugins">section</a>. This option can be used multiple times.</td>
+    <td>Load plugin. See <a href="#load-external-plugins-option-plugin">section</a>. This option can be used multiple times.</td>
   </tr>
   <tr>
     <td><code>--level number</code></td>
