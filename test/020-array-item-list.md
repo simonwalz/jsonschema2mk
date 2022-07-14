@@ -1,4 +1,3 @@
-<a name="root"></a>
 # Array Item List
 
 This examples show an item list.

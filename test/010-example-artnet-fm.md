@@ -3,7 +3,6 @@ parent: Reference
 nav_order: 1
 ---
 
-<a name="root"></a>
 # osiota application artnet
 
 This application allows controlling lights over the Art-Net protocol.

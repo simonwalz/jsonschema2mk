@@ -1,4 +1,3 @@
-<a name="root"></a>
 # Array Item List in Object
 
 This examples show an item list in an object.

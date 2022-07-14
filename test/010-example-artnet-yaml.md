@@ -1,4 +1,3 @@
-<a name="root"></a>
 # osiota application artnet
 
 This application allows controlling lights over the Art-Net protocol.

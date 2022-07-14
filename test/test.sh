@@ -19,7 +19,7 @@ done
 	--extension front-matter \
 	--extension yaml-examples >010-example-artnet-fm2.md
 
-if test "x$(git status -s *.md | grep -vE "^A ")" != "x"
+if test "x$(git status -s *.md | grep -vE "^[AM] ")" != "x"
 then
 	echo "Error: Generated files changed!" 2>&1
 	echo "If the change was intended, commit the changed files and rerun the test" 2>&1

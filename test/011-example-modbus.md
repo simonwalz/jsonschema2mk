@@ -1,4 +1,3 @@
-<a name="root"></a>
 # osiota application modbus
 
 This application connects devices via Modbus.

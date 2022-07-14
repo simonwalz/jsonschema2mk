@@ -1,4 +1,3 @@
-<a name="root"></a>
 # Settings
 
 Beschreibung
