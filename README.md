@@ -128,11 +128,18 @@ You can load feature extensions if needed.
 Implemented Extensions:
 
   * `yaml-examples`: Show examples in YAML format.
+  * `front-matter`: Add a [front matter block](https://jekyllrb.com/docs/front-matter/).<br/>You can define the front-matter with `--fm.para1 value1 --fm.para2 value2`
 
-Example Call:
+Example Calls:
 
 ```sh
-npx jsonschema2mk --schema schema.json --extension yaml-examples --extension abc >DOC.md
+# yaml-examples
+npx jsonschema2mk --schema schema.json \
+	--extension yaml-examples >DOC.md
+# yaml-examples and front matter
+npx jsonschema2mk --schema schema.json \
+	--extension yaml-examples \
+	--extension front-matter --fm.parent Reference --fm.nav_order 1 >DOC2.md
 ```
 
 

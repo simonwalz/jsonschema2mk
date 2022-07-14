@@ -11,7 +11,15 @@ done
 
 ../cli.js --schema "010-example-artnet.json" --extension yaml-examples >010-example-artnet-yaml.md
 
-if test "x$(git status -s *.md)" != "x"
+../cli.js --schema "010-example-artnet.json" \
+	--extension front-matter --fm.parent Reference --fm.nav_order 1 \
+	--extension yaml-examples >010-example-artnet-fm.md
+
+../cli.js --schema "010-example-artnet.json" \
+	--extension front-matter \
+	--extension yaml-examples >010-example-artnet-fm2.md
+
+if test "x$(git status -s *.md | grep -vE "^A ")" != "x"
 then
 	echo "Error: Generated files changed!" 2>&1
 	echo "If the change was intended, commit the changed files and rerun the test" 2>&1
