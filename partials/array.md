@@ -1,5 +1,5 @@
 {{#if (isdefined items)~}}
-{{#if (equal (type items) "array")}}
+{{#if (equal (gettype items) "array")}}
 {{#each items}}
 
 **Item {{plus @key 1}}{{#if title}}: {{title}}{{/if}}**

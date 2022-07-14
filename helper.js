@@ -8,7 +8,7 @@ exports.and = function(a, b) {
 	return a && b;
 };
 
-exports.type = function(value) {
+exports.gettype = function(value) {
 	if (Array.isArray(value)) return "array";
 	return typeof value;
 };

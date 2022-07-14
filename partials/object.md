@@ -17,7 +17,7 @@
 
 {{/if}}
 {{#if (isdefined additionalProperties)}}
-{{#if (equal (type additionalProperties) "boolean")}}
+{{#if (equal (gettype additionalProperties) "boolean")}}
 **{{prefix_text}}Additional Properties:** {{#unless additionalProperties}}not {{/unless}}allowed<br/>
 {{else}}
 **{{prefix_text}}Additional Properties**
