@@ -127,19 +127,23 @@ You can load feature extensions if needed.
 
 Implemented Extensions:
 
+  * `table-format-2`: Show tables with the columns *name*, *type*, *title*, *description* and *required*. Default is to display a combined *name* and *title* column. See [example output](test/010-example-artnet-table2.md).
   * `yaml-examples`: Show examples in YAML format.
   * `front-matter`: Add a [front matter block](https://jekyllrb.com/docs/front-matter/).<br/>You can define the front-matter with `--fm.para1 value1 --fm.para2 value2`
 
 Example Calls:
 
 ```sh
+# table-format 2
+npx jsonschema2mk --schema schema.json \
+	--extension table-format-2 >DOC.md
 # yaml-examples
 npx jsonschema2mk --schema schema.json \
-	--extension yaml-examples >DOC.md
+	--extension yaml-examples >DOC2.md
 # yaml-examples and front matter
 npx jsonschema2mk --schema schema.json \
 	--extension yaml-examples \
-	--extension front-matter --fm.parent Reference --fm.nav_order 1 >DOC2.md
+	--extension front-matter --fm.parent Reference --fm.nav_order 1 >DOC3.md
 ```
 
 
