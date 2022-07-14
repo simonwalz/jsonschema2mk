@@ -27,13 +27,13 @@
 
 
 {{~#if (isdefined minItems)}}
-**Minimum Items:** {{escape minItems}}<br/>
+**Minimum Items:** {{escape minItems}}{{br}}
 {{/if~}}
 {{#if (isdefined maxItems)}}
-**Maximum Items:** {{escape maxItems}}<br/>
+**Maximum Items:** {{escape maxItems}}{{br}}
 {{/if~}}
 {{#if (isdefined uniqueItems)}}
-**Unique Items:** {{#if uniqueItems}}yes{{else}}no{{/if}}<br/>
+**Unique Items:** {{#if uniqueItems}}yes{{else}}no{{/if}}{{br}}
 {{/if~}}
 
 {{/if~}}
@@ -50,10 +50,10 @@
 {{> type contains path=(pathjoin path "" .) prefix_text="Contains Item "~}}
 
 {{#if (isdefined minContains)}}
-**Minimum Contains:** {{escape minContains}}<br/>
+**Minimum Contains:** {{escape minContains}}{{br}}
 {{/if~}}
 {{~#if (isdefined maxContains)}}
-**Maximum Contains:** {{escape maxContains}}<br/>
+**Maximum Contains:** {{escape maxContains}}{{br}}
 {{/if~}}
 
 {{/if~}}

@@ -3,7 +3,7 @@
 Beschreibung
 
 
-**Type:** `string`<br/>
+**Type:** `string`  
 **Example**
 
 ```json

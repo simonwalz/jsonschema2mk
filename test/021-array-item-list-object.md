@@ -9,7 +9,7 @@ This examples show an item list in an object.
 |----|----|-----------|--------|
 |[**elements**](#elements)|`array`|||
 
-**Additional Properties:** not allowed<br/>
+**Additional Properties:** not allowed  
 **Example**
 
 ```json
@@ -39,7 +39,7 @@ This examples show an item list in an object.
 
 **Item 2: Element Zwei**
 
-**Item 2 Type:** `string`<br/>
+**Item 2 Type:** `string`  
 
 **Example**
 

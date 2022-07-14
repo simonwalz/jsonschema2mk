@@ -1,5 +1,10 @@
 var Handlebars = require('handlebars');
 
+exports.br = function() {
+	//return new Handlebars.SafeString("<br/>");
+	return new Handlebars.SafeString("  ");
+};
+
 exports.or = function(a, b) {
 	return a || b;
 };

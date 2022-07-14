@@ -18,7 +18,7 @@
 {{/if}}
 {{#if (isdefined additionalProperties)}}
 {{#if (equal (gettype additionalProperties) "boolean")}}
-**{{prefix_text}}Additional Properties:** {{#unless additionalProperties}}not {{/unless}}allowed<br/>
+**{{prefix_text}}Additional Properties:** {{#unless additionalProperties}}not {{/unless}}allowed{{br}}
 {{else}}
 **{{prefix_text}}Additional Properties**
 
@@ -31,11 +31,11 @@
 {{/if~}}
 
 {{#if (isdefined minProperties)}}
-**{{prefix_text}}Minimal Properties:** {{escape minProperties}}<br/>
+**{{prefix_text}}Minimal Properties:** {{escape minProperties}}{{br}}
 {{/if~}}
 {{#if (isdefined maxProperties)}}
-**{{prefix_text}}Maximal Properties:** {{escape maxProperties}}<br/>
+**{{prefix_text}}Maximal Properties:** {{escape maxProperties}}{{br}}
 {{/if~}}
 {{#if (and (isdefined propertyNames) (isdefined propertyNames.pattern))}}
-**{{prefix_text}}Property Name Pattern:** {{code propertyNames.pattern}}<br/>
+**{{prefix_text}}Property Name Pattern:** {{code propertyNames.pattern}}{{br}}
 {{/if~}}

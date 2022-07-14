@@ -3,8 +3,9 @@
 This application connects devices via Modbus.
 
 
-**Additional Properties:** not allowed<br/>
-<br>**Option 1 (alternative):** 
+**Additional Properties:** not allowed  
+   
+**Option 1 (alternative):** 
 Modbus Serial Interface
 
 
@@ -30,7 +31,8 @@ Modbus Serial Interface
 ```
 
 
-<br>**Option 2 (alternative):** 
+   
+**Option 2 (alternative):** 
 Modbus Network Interface
 
 
@@ -101,7 +103,7 @@ Modbus Network Interface
 <a name="option1mapmetadata"></a>
 ### Option 1: map\.metadata: Node Metadata
 
-**Additional Properties:** allowed<br/>
+**Additional Properties:** allowed  
 <a name="option2connect_options"></a>
 ## Option 2: connect\_options: Network Connect Options
 
@@ -147,5 +149,5 @@ Modbus Network Interface
 <a name="option2mapmetadata"></a>
 ### Option 2: map\.metadata: Node Metadata
 
-**Additional Properties:** allowed<br/>
+**Additional Properties:** allowed  
 
