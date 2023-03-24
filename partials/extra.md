@@ -21,7 +21,7 @@
 **{{prefix_text}}Format:** {{jsoninline format}}{{br}}
 {{/if}}
 	{{~#if (isdefined pattern)~}}
-**{{prefix_text}}Pattern:** {{escape pattern}}{{br}}
+**{{prefix_text}}Pattern:** {{code pattern}}{{br}}
 {{/if}}
 {{~/if}}
 {{~#if (or (is_type type "number") (is_type type "integer"))~}}
