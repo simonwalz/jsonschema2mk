@@ -41,6 +41,7 @@ Examples:
     * minContains, maxContains
   * allOf, oneOf, anyOf, not (not for object properties)
   * multiple types (`type: ["string", "null"]`)
+  * object: dependencies (Properties and Schema)
 
 
 ### Missing JSON schema features

@@ -39,3 +39,16 @@
 {{#if (and (isdefined propertyNames) (isdefined propertyNames.pattern))}}
 **{{prefix_text}}Property Name Pattern:** {{code propertyNames.pattern}}{{br}}
 {{/if~}}
+{{#if (isdefined dependentRequired)}}
+{{#each dependentRequired}}
+**{{prefix_text}}If property *{{@key}}* is defined**, property/ies {{#each this}}*{{this}}*{{#unless @last}}, {{/unless}}{{/each}} is/are required.{{br}}
+{{/each}}
+{{/if~}}
+{{#if (isdefined dependentSchemas)}}
+{{#each dependentSchemas}}
+**{{prefix_text}}If property *{{@key}}* is defined**:
+
+{{> element_part this type=(or type ../type) path=(pathjoin path (plus "dependentSchemas " @key))}}
+
+{{/each}}
+{{/if~}}
