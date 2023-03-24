@@ -200,21 +200,65 @@ exports.length = function(object) {
 	return false;
 };
 
+exports.getid_objects = function(object, id_objects) {
+	// go through all objects and search for $id objects
+	if (typeof id_objects !== "object" || id_objects === null) {
+		id_objects = {};
+	}
+	if (typeof object !== "object" || object === null) {
+		return id_objects;
+	}
+	if (typeof object['$id'] === "string") {
+		id_objects[object['$id']] = object;
+	}
+	if (typeof object['$anchor'] === "string") {
+		id_objects["#"+object['$anchor']] = object;
+	}
+	for (let key in object) {
+		if (object.hasOwnProperty(key)) {
+			exports.getid_objects(object[key], id_objects);
+		}
+	}
+	return id_objects;
+};
+
 exports.getref = function(object) {
 	if (typeof object['$ref'] === "string") {
 		var o = exports.data.schema;
-		var path = object['$ref'].replace(/^#\//, '');
-		path.split(/\//).forEach(function(p) {
-			if (o.hasOwnProperty(p) &&
-					typeof o[p] === "object" &&
-					o[p] !== null) {
-				o = o[p];
-			} else {
-				throw new Error("ref not found.");
-			}
-		});
-		o.path = path;
-		return o;
+		if (!exports.data["$ids"]) {
+			exports.data["$ids"] = exports.getid_objects(o);
+		}
+		// check ids
+		if (exports.data["$ids"].hasOwnProperty(object["$ref"])) {
+			let o =  exports.data["$ids"][object["$ref"]];
+			o.path = object["$ref"];
+			return o;
+		}
+
+		// local refs:
+		if (object['$ref'].match(/^#\//)) {
+			var path = object['$ref'].replace(/^#\//, '');
+			path.split(/\//).forEach(function(p) {
+				if (o.hasOwnProperty(p) &&
+						typeof o[p] === "object" &&
+						o[p] !== null) {
+					o = o[p];
+				} else {
+					throw new Error("ref not found.");
+				}
+			});
+			o.path = path;
+			return o;
+		}
+
+		// remote refs:
+		if (object['$ref'].match(/^https?:\/\//)) {
+			throw new Error("Remote refs not implemented");
+		}
+
+		// file refs:
+		throw new Error("File sytem refs not implemented");
+
 	}
 	return object;
 };

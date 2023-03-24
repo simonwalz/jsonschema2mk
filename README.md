@@ -13,7 +13,7 @@ Examples:
     * title, description, default, examples
     * enum, const
     * deprecated
-    * $ref locally
+    * $ref is same file, $id, $anchor
   * number, integer
     * minimum, maximum, exclusiveMinimum, exclusiveMaximum
     * multipleOf
@@ -47,8 +47,7 @@ Examples:
 
 ### Missing JSON schema features
 
-  * if, then, else
-  * object: dependencies (Properties and Schema)
+  * $ref remotely or in other files
 
 
 ## Install & Usage
