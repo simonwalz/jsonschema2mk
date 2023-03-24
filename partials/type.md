@@ -1,6 +1,14 @@
 {{#if (noproperties .)}}
+{{#if required}}
+**Required Properties:**
+
+{{#each required}}
+  * {{this}}
+{{/each}}
+{{else}}
 **No properties.**
 
+{{/if}}
 {{/if}}
 {{#if (is_type type "object") ~}}
 {{> object . ~}}
