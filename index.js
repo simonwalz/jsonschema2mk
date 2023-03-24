@@ -47,7 +47,7 @@ var jsonschema2mk = function(options) {
 			options.plugin = [ options.plugin ];
 		}
 		options.plugin.forEach(function(plugin) {
-			require(""+plugin)(this.data, this);
+			require(""+plugin)(_this.data, _this);
 		});
 	}
 
@@ -57,7 +57,7 @@ var jsonschema2mk = function(options) {
 			options.partials = [ options.partials ];
 		}
 		options.partials.forEach(function(partials) {
-			this.load_partial_dir(partials);
+			_this.load_partial_dir(partials);
 		});
 	}
 };
