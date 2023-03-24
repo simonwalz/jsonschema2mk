@@ -36,3 +36,28 @@
  {{br}}
 **Not [{{plus @key 1}}]:** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "not[" (plus (plus @key 1) "]: ")))}}
 {{/each}}
+{{#if if}}
+ {{br}}
+{{explain if type}}
+
+{{#if (isdefined then)~}}
+**THEN**
+
+{{#if then}}
+{{> element_part then type=(or then.type type) path=(pathjoin path "then")}}
+{{else}}
+never valid.
+{{/if}}
+
+{{/if}}
+{{#if (isdefined else)~}}
+**OTHERWISE**
+
+{{#if else}}
+{{> element_part else type=(or then.type type) path=(pathjoin path "else")}}
+{{else}}
+never valid.
+{{/if}}
+
+{{/if}}
+{{/if}}

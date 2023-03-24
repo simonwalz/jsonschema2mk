@@ -40,6 +40,7 @@ Examples:
     * contains
     * minContains, maxContains
   * allOf, oneOf, anyOf, not (not for object properties)
+  * if, then, else
   * multiple types (`type: ["string", "null"]`)
   * object: dependencies (Properties and Schema)
 

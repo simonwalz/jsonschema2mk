@@ -5,6 +5,7 @@
   "main": "index.js",
   "bin": "cli.js",
   "dependencies": {
+    "explain-json-schema": "^1.1.1",
     "handlebars": "^4.7.7",
     "js-yaml": "^4.1.0",
     "minimist": "^1.2.6"

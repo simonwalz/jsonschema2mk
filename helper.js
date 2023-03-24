@@ -1,4 +1,5 @@
 var Handlebars = require('handlebars');
+const explain_json_schema = require("explain-json-schema").explain;
 
 exports.br = function() {
 	//return new Handlebars.SafeString("<br/>");
@@ -270,4 +271,17 @@ exports.is_type = function(type, pattern) {
 	if (Array.isArray(type))
 		return type.includes(pattern);
 	return type === pattern;
+};
+
+exports.explain = function(object, type) {
+	var valid = explain_json_schema(object, 0);
+	if (valid === null) {
+		return "**Always**\n";
+	} else if (valid === "never") {
+		return "**Never**\n";
+	} else {
+		return new Handlebars.SafeString(
+			"**IF** " + (type || "it") + "\n" + valid
+		);
+	}
 };
