@@ -75,7 +75,6 @@
 	"definitions": {
 		"map": {
 			"type": "array",
-			"format": "tabs",
 			"title": "Modbus devices",
 			"items": {
 				"type": "object",
