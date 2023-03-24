@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "foo": {
+      "type": "string"
+    },
+    "bar": {
+      "type": "string"
+    }
+  },
+  "if": {
+    "properties": {
+      "foo": {
+        "enum": [
+          "bar"
+        ]
+      }
+    },
+    "required": [
+      "foo"
+    ]
+  },
+  "then": {
+    "required": [
+      "bar"
+    ]
+  },
+  "else": false
+}
