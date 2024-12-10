@@ -32,6 +32,12 @@ exports.escape = function(text) {
 	return new Handlebars.SafeString(result);
 };
 
+exports.escapeRegexp = function(text) {
+	if (typeof text === "undefined" || text === null) return "";
+	var result = text.toString().replace(/(\|)/g, "\\$1");
+	return new Handlebars.SafeString(result);
+}
+
 exports.json = function (string) {
 	var result = "```json\n"+
 		JSON.stringify(string, undefined, "    ")+"\n"+

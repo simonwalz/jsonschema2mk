@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "title": "VPC Configuration",
+  "properties": {
+    "id": {
+      "type": "string",
+      "title": "VPC ID",
+      "pattern": "^vpc-([0-9a-f]{8}|[0-9a-f]{17})$",
+      "examples": ["vpc-1a2b3c4d"],
+      "description": "The identifier of the VPC"    
+    }
+  }
+}
