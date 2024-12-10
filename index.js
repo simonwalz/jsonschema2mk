@@ -24,7 +24,7 @@ var jsonschema2mk = function(options) {
 	this.Handlebars.registerHelper(this.Helper);
 	this.Handlebars.registerHelper(require('./helper_examples.js'));
 
-	this.load_partial_dir(__dirname + "/partials/"); 
+	this.load_partial_dir(__dirname + "/partials/");
 
 	this.data = {
 		schema: parseSchema(options),
