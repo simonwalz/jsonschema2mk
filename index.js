@@ -3,6 +3,17 @@
 const fs = require('fs');
 const path = require('path');
 
+function parseSchema(options) {
+	const { schema } = options;
+
+	if (schema && typeof schema === "object") {
+		return schema;
+	}
+
+	const schemaPath = schema || "schema.json";
+	return JSON.parse(fs.readFileSync(schemaPath));
+}
+
 var jsonschema2mk = function(options) {
 	var _this = this;
 
@@ -13,11 +24,10 @@ var jsonschema2mk = function(options) {
 	this.Handlebars.registerHelper(this.Helper);
 	this.Handlebars.registerHelper(require('./helper_examples.js'));
 
-	this.load_partial_dir(__dirname + "/partials/");
+	this.load_partial_dir(__dirname + "/partials/"); 
 
 	this.data = {
-		schema: JSON.parse(fs.readFileSync(
-				options.schema || "schema.json")),
+		schema: parseSchema(options),
 		argv: options,
 	};
 
