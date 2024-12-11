@@ -116,7 +116,7 @@ npx jsonschema2mk [<options>] >DOC.md
   </tr>
   <tr>
     <td><code>--level number</code></td>
-    <td>Initial Markdown heading level. Defaul is Zero.</td>
+    <td>Initial Markdown heading level. Default is Zero.</td>
   </tr>
   </tbody>
 </table>
@@ -176,6 +176,53 @@ npx jsonschema2mk --schema schema.json --plugin my-plugin.js >DOC.md
 ## Usage as Libray
 
 You can integration this code as Library. See `cli.js` for an example.
+
+```js
+const jsonschema2mk = require("jsonschema2mk");
+
+const schema = {
+	"type": "number"
+};
+
+const jsm = new jsonschema2mk({
+	level: 0
+});
+const output = jsm.convert(schema);
+```
+
+Options see [CLI options](#command-line-options)
+
+<table>
+  <thead>
+  <tr>
+    <th>Option</th>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>partials</td>
+    <td><code>string</code></td>
+    <td>Overwrite partials. Define dir, where to load partioals from. You can overwrite every partial (see directory partials/) or define own ones. This option can be used multiple times.</td>
+  </tr>
+  <tr>
+    <td>extension</td>
+    <td><code>string</code></td>
+    <td>Load feature extension. See <a href="#internal-feature-extensions-option-extension">section</a>. This option can be used multiple times.</td>
+  </tr>
+  <tr>
+    <td>plugin</td>
+    <td><code>string</code></td>
+    <td>Load plugin. See <a href="#load-external-plugins-option-plugin">section</a>. This option can be used multiple times.</td>
+  </tr>
+  <tr>
+    <td>level</td>
+    <td><code>number</code></td>
+    <td>Initial Markdown heading level. Default is Zero.</td>
+  </tr>
+  </tbody>
+</table>
 
 ## Examples
 

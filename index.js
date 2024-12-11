@@ -16,8 +16,7 @@ var jsonschema2mk = function(options) {
 	this.load_partial_dir(__dirname + "/partials/");
 
 	this.data = {
-		schema: JSON.parse(fs.readFileSync(
-				options.schema || "schema.json")),
+		schema: undefined,
 		argv: options,
 	};
 
@@ -76,6 +75,12 @@ jsonschema2mk.prototype.generate = function() {
 		this._generate = this.Handlebars.compile("{{> main}}");
 	}
 	return this._generate.apply(this, arguments);
+};
+jsonschema2mk.prototype.convert = function(schema) {
+	delete this.data["$ids"];
+	this.data.schema = schema;
+
+	return this.generate(this.data);
 };
 
 module.exports = jsonschema2mk;
