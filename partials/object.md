@@ -37,7 +37,7 @@
 **{{prefix_text}}Maximal Properties:** {{escape maxProperties}}{{br}}
 {{/if~}}
 {{#if (and (isdefined propertyNames) (isdefined propertyNames.pattern))}}
-**{{prefix_text}}Property Name Pattern:** `{{escapeRegexp propertyNames.pattern}}`{{br}}
+**{{prefix_text}}Property Name Pattern:** {{code (escapeRegexp propertyNames.pattern)}}{{br}}
 {{/if~}}
 {{#if (isdefined dependentRequired)}}
 {{#each dependentRequired}}

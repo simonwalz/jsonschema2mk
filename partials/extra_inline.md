@@ -6,7 +6,7 @@
 {{~#if (isdefined minLength)}}{{prefix_text}}Minimal Length: {{jsoninline minLength}}<br/>{{~/if}}
 {{~#if (isdefined maxLength)}}{{prefix_text}}Maximal Length: {{jsoninline maxLength}}<br/>{{~/if}}
 {{~#if (isdefined format)}}{{prefix_text}}Format: {{jsoninline format}}<br/>{{~/if}}
-{{~#if (isdefined pattern)}}{{prefix_text}}Pattern: `{{escapeRegexp pattern}}`<br/>{{~/if~}}
+{{~#if (isdefined pattern)}}{{prefix_text}}Pattern: {{code (escapeRegexp pattern)}}<br/>{{~/if~}}
 {{~#if (isdefined exclusiveMinimum)}}{{prefix_text}}Minimum (exclusive): {{jsoninline exclusiveMinimum}}<br/>{{~/if}}
 {{~#if (isdefined minimum)}}{{prefix_text}}Minimum: {{jsoninline minimum}}<br/>{{~/if}}
 {{~#if (isdefined exclusiveMaximum)}}{{prefix_text}}Maximum (exclusive): {{jsoninline exclusiveMaximum}}<br/>{{~/if}}
