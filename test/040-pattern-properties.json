@@ -1,0 +1,62 @@
+{
+	"type": "object",
+		"patternProperties": {
+			"^(?!.*doesnotcontain).*$": {
+				"type": "object",
+				"title": "Database",
+				"description": "Settings for the database",
+				"oneOf": [
+					{
+						"description": "SQL",
+						"properties": {
+							"type": {
+								"description": "type",
+								"type": "string",
+								"enum": ["mysql", "oracle", "postgresql"]
+							},
+							"host": { "description": "host", "type": "string" }
+						},
+						"additionalProperties": false,
+						"required": ["type", "host"],
+						"examples": [
+						{
+							"hallo": {
+								"type": "postgresql",
+								"host": "localhost"
+							}
+						}
+						]
+					},
+					{
+						"description": "Cassandra",
+						"properties": {
+							"type": {
+								"description": "type",
+								"type": "string",
+								"enum": ["cassandra"]
+							},
+							"hosts": {
+								"description": "hosts",
+								"type": "array",
+								"items": {
+									"type": "string",
+									"title": "Cassandra node"
+								}
+							}
+						},
+						"additionalProperties": false,
+						"required": ["type", "hosts"],
+						"examples": [
+						{
+							"welt": {
+								"type": "cassandra",
+								"hosts": ["localhost"]
+							}
+						}
+						]
+					}
+				]
+			}
+		},
+		"additionalProperties": false
+}
