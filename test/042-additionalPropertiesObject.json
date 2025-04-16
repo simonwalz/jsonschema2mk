@@ -1,0 +1,17 @@
+{
+	"type": "object",
+	"title": "additional property object",
+	"properties": {
+		"host": {
+			"title": "Host",
+			"type": "string",
+			"default": "255.255.255.255",
+			"examples": [ "192.0.2.42" ]
+		}
+    },
+	"additionalProperties": {
+		"description": "Hello World",
+		"type": "string",
+		"pattern": "^ABC_.*$"
+	}
+}

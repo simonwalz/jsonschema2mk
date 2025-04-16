@@ -1,0 +1,25 @@
+{
+	"type": "object",
+	"title": "additional property object",
+	"properties": {
+		"host": {
+			"title": "Host",
+			"type": "string",
+			"default": "255.255.255.255",
+			"examples": [ "192.0.2.42" ]
+		}
+    },
+	"additionalProperties": {
+		"type": "object",
+		"description": "Hello World",
+		"properties": {
+			"description": {
+				"type": "string"
+			},
+			"value": {
+				"type": "number"
+			}
+		},
+		"required": ["description", "value"]
+	}
+}

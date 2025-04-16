@@ -23,9 +23,7 @@
 **{{prefix_text}}Additional Properties**
 
 {{> object_property_header}}
-{{#each properties ~}}
-{{> object_property (jsmk_property . path=(pathjoinobj ../path @key .) parent=.. name=@key)}}
-{{/each}}
+{{> object_property (jsmk_property additionalProperties path=(pathjoin path "additionalProperties" additionalProperties) parent=. name="Additional Properties")}}
 
 {{/if}}
 {{/if~}}
