@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ref and Examples",
+  "description": "Test for issue #28",
+  "type": "object",
+  "properties": {
+    "property": {
+      "description": "My Property",
+      "$ref": "#/$defs/MyRef"
+    }
+  },
+  "$defs": {
+    "MyRef": {
+      "description": "My reffered Property",
+      "type": "object",
+      "properties": {
+        "sub_property1": {
+          "type": "number",
+          "description": "My Sub Property 1",
+          "examples": [
+            23
+          ]
+        },
+        "sub_proerty2": {
+          "description": "My Sub Property 2",
+          "type": "number",
+          "default": 42
+        }
+      }
+    }
+  }
+}

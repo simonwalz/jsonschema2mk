@@ -1,3 +1,4 @@
+var Helper = require('./helper.js');
 
 var examples_get = function(examples) {
 	if (!Array.isArray(examples) || !examples.length) {
@@ -15,6 +16,7 @@ var examples_get = function(examples) {
 
 
 var merge_examples = function(item) {
+	var item = Helper.getref(item);
 	if (Array.isArray(item.examples) && item.examples.length) {
 		return examples_get(item.examples);
 	}
