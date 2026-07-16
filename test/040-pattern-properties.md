@@ -8,8 +8,6 @@
 
 **Additional Properties:** not allowed   
    
-
----
 <a name="doesnotcontain"></a>
 #### ^\(?\!\.\*doesnotcontain\)\.\*$: Database
 
@@ -69,8 +67,6 @@ Cassandra
 
 
    
-
----
 <a name="option2hosts"></a>
 ## Option 2: hosts\[\]: array
 

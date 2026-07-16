@@ -35,8 +35,6 @@ This application allows controlling lights over the Art-Net protocol.
 ```
 
    
-
----
 <a name="map"></a>
 ## map\[\]: DMX channels
 

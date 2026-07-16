@@ -59,8 +59,6 @@ Modbus Network Interface
 
 
    
-
----
 <a name="option1connect_options"></a>
 ## Option 1: connect\_options: Serial Connect Options
 
@@ -71,8 +69,6 @@ Modbus Network Interface
 |**baudRate**<br/>(Baud rate)|`number`|||
 
    
-
----
 <a name="option1map"></a>
 ## Option 1: map: Modbus devices
 
@@ -107,15 +103,11 @@ Modbus Network Interface
 ```
 
    
-
----
 <a name="option1mapmetadata"></a>
 ### Option 1: map\.metadata: Node Metadata
 
 **Additional Properties:** allowed   
    
-
----
 <a name="option2connect_options"></a>
 ## Option 2: connect\_options: Network Connect Options
 
@@ -126,8 +118,6 @@ Modbus Network Interface
 |**port**|`number`|||
 
    
-
----
 <a name="option2map"></a>
 ## Option 2: map: Modbus devices
 
@@ -162,8 +152,6 @@ Modbus Network Interface
 ```
 
    
-
----
 <a name="option2mapmetadata"></a>
 ### Option 2: map\.metadata: Node Metadata
 

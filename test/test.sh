@@ -9,17 +9,22 @@ do
 	../cli.js --schema "$i" >"${mdfilename}"
 done
 
-../cli.js --schema "010-example-artnet.json" --extension yaml-examples >010-example-artnet-yaml.md
+../cli.js --schema "010-example-artnet.json" \
+	--extension hr-before-heading \
+	--extension yaml-examples >010-example-artnet-yaml.md
 
 ../cli.js --schema "010-example-artnet.json" \
 	--extension front-matter --fm.parent Reference --fm.nav_order 1 \
+	--extension hr-before-heading \
 	--extension yaml-examples >010-example-artnet-fm.md
 
 ../cli.js --schema "010-example-artnet.json" \
 	--extension front-matter \
+	--extension hr-before-heading \
 	--extension yaml-examples >010-example-artnet-fm2.md
 
 ../cli.js --schema "010-example-artnet.json" \
+	--extension hr-before-heading \
 	--extension table-format-2 >010-example-artnet-table2.md
 
 if test "x$(git status -s *.md | grep -vE "^[AM] ")" != "x"

@@ -24,8 +24,6 @@ This examples show an item list in an object.
 ```
 
    
-
----
 <a name="elements"></a>
 ## elements\[\]: Elements
 

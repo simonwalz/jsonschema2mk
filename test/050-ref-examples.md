@@ -21,8 +21,6 @@ Test for issue #28
 ```
 
    
-
----
 <a name="property"></a>
 ## property: object
 
