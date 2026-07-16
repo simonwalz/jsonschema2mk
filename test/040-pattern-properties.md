@@ -9,7 +9,7 @@
 **Additional Properties:** not allowed   
    
 <a name="doesnotcontain"></a>
-#### ^\(?\!\.\*doesnotcontain\)\.\*$: Database
+## ^\(?\!\.\*doesnotcontain\)\.\*$: Database
 
 Settings for the database
 
@@ -68,7 +68,7 @@ Cassandra
 
    
 <a name="option2hosts"></a>
-## Option 2: hosts\[\]: array
+### Option 2: hosts\[\]: array
 
 hosts
 

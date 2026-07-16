@@ -1,3 +1,4 @@
+{{debug "element" .~}}
 {{>heading .~}}
 {{#if (or description deprecated)}}
 
@@ -12,3 +13,4 @@
 {{#each (get_ref_items) ~}}
 {{>element . ~}}
 {{/each ~}}
+{{~debug "/element" .~}}

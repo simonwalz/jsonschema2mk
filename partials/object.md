@@ -1,9 +1,10 @@
+{{debug  "object" .~}}
 {{#if (length properties) ~}}
 **{{prefix_text}}Properties**
 
 {{> object_property_header}}
 {{#each properties ~}}
-{{> object_property (jsmk_property . path=(pathjoinobj ../path @key .) parent=.. name=@key)}}
+{{> object_property (jsmk_property . path=(pathjoinobj ../path @key .) parent=.. name=@key level=(plus_level ../level 1))}}
 {{/each}}
 
 {{/if}}
@@ -12,7 +13,7 @@
 
 {{> object_property_header}}
 {{#each patternProperties ~}}
-{{> object_property (jsmk_property . path=(pathjoinobj ../path @key .) parent=.. name=@key)}}
+{{> object_property (jsmk_property . path=(pathjoinobj ../path @key .) parent=.. name=@key level=(plus_level ../level 1))}}
 {{/each}}
 
 {{/if~}}
@@ -23,7 +24,7 @@
 **{{prefix_text}}Additional Properties**
 
 {{> object_property_header~}}
-{{> object_property (jsmk_property additionalProperties path=(pathjoin path "additionalProperties" additionalProperties) parent=. name="Additional Properties")}}
+{{> object_property (jsmk_property additionalProperties path=(pathjoin path "additionalProperties" additionalProperties) parent=. name="Additional Properties" level=(plus_level level 1))}}
 
 {{/if~}}
 {{/if~}}
@@ -46,7 +47,8 @@
 {{#each dependentSchemas~}}
 **{{prefix_text}}If property *{{@key}}* is defined**:
 
-{{> element_part this type=(or type ../type) path=(pathjoin path (plus "dependentSchemas " @key))}}
+{{> element_part this type=(or type ../type) path=(pathjoin path (plus "dependentSchemas " @key)) level=(plus_level ../level 1)}}
 
 {{/each~}}
 {{/if~}}
+{{~debug "/object" .~}}

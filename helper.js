@@ -98,17 +98,29 @@ exports.regexpTest = function(text, regexp) {
 };
 
 exports.level_plus = 0;
-exports.mdlevel = function(path, options) {
-	var level = 1;
-	if (path && path !== "root") {
-		level = path.split(/\./).length + 1;
-	}
-	if (options.hash.plus) {
-		level += options.hash.plus;
-	}
+exports.print_level = function(level) {
+	if (!level) level = 1;
 	return new Handlebars.SafeString(
 		"#".repeat(level+exports.level_plus)
 	);
+};
+
+exports.plus_level = function(level, increment, context) {
+	let pre = "  ".repeat(level);
+	//console.log(pre, "plus_level", level); //, context);
+	if (!level) level = 1;
+	if (!increment) increment = 1;
+	return level + increment;
+};
+
+exports.debug = function(partial, object) {
+	const level = object.level;
+	const path = object.path;
+	let pre = "  ".repeat(level);
+	if (process && process.env.DEBUG) {
+		console.debug(pre, "debug:", partial, "level", level, path);
+	}
+	return "";
 };
 
 exports.pathjoinobj = function(path, property_name, object) {
@@ -137,6 +149,8 @@ exports.jsmk_property = function(property, options) {
 		...property,
 		...options.hash,
 	};
+	let pre = "  ".repeat(o.level);
+	//console.log(pre, "property level", o.level);
 	if (!Array.isArray(o.examples) || !o.examples.length) {
 		if (typeof o.default !== "undefined") {
 			o.examples = [ o.default ];

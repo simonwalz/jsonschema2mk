@@ -1,3 +1,4 @@
+{{debug "type" .~}}
 {{#if (noproperties .)~}}
 {{#if required~}}
 **Required Properties:**
@@ -22,20 +23,20 @@
 
 {{~#each oneOf~}}
 {{br}}
-**Option {{plus @key 1}} (alternative):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": ")))}}
+**Option {{plus @key 1}} (alternative):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": "))) level=../level}}
 {{/each~}}
 {{#each anyOf~}}
 {{br}}
-**Option {{plus @key 1}} (optional):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": ")))}}
+**Option {{plus @key 1}} (optional):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": "))) level=../level}}
 {{/each~}}
 {{#each allOf~}}
 {{br}}
 **All of {{plus @key 1}}:**
-{{> element_part . type=(or type ../type) path=(pathjoin path @key)}}
+{{> element_part . type=(or type ../type) path=(pathjoin path (plus "All of " (plus (plus @key 1) ": "))) level=../level}}
 {{/each~}}
 {{#each not~}}
 {{br}}
-**Not [{{plus @key 1}}]:** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "not[" (plus (plus @key 1) "]: ")))}}
+**Not [{{plus @key 1}}]:** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "not[" (plus (plus @key 1) "]: "))) level=../level}}
 {{/each~}}
 {{#if if~}}
 {{br}}
@@ -45,7 +46,7 @@
 **THEN**
 
 {{#if then~}}
-{{> element_part then type=(or then.type type) path=(pathjoin path "then")}}
+{{> element_part then type=(or then.type type) path=(pathjoin path "then") level=level}}
 {{else~}}
 never valid.
 {{/if}}
@@ -55,10 +56,11 @@ never valid.
 **OTHERWISE**
 
 {{#if else~}}
-{{> element_part else type=(or then.type type) path=(pathjoin path "else")}}
+{{> element_part else type=(or then.type type) path=(pathjoin path "else") level=level}}
 {{else~}}
 never valid.
 {{/if~}}
 
 {{/if~}}
 {{/if~}}
+{{~debug "/type" .~}}

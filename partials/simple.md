@@ -1,4 +1,6 @@
-{{~#if (isdefined type)}}
+{{debug "simple" .~}}
+{{~#if (isdefined type)~}}
 **{{prefix_text}}Type:** {{code type}}{{br}}
-{{/if}}
+{{/if~}}
 {{> extra .}}
+{{~debug "/simple" .~}}

@@ -18,6 +18,7 @@ var jsonschema2mk = function(options) {
 	this.data = {
 		schema: undefined,
 		argv: options,
+		level: 1,
 	};
 
 	if (typeof options.level !== "undefined") {

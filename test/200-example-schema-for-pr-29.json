@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Deployment Pipeline Schema (inspired for PR #29)",
+  "type": "object",
+  "properties": {
+    "deployment": {
+      "title": "Deployment Configuration",
+      "description": "Configure deployment execution",
+      "type": "object",
+      "properties": {
+        "kubernetes": {
+          "title": "Kubernetes Deployments",
+          "description": "Run Kubernetes-based deployments",
+          "type": "object",
+          "allOf": [
+            {
+              "title": "deployment-options",
+              "description": "Deployment execution options",
+              "anyOf": [
+                {
+                  "title": "manifest",
+                  "properties": {
+                    "manifestFile": {
+                      "title": "Deployment Manifest",
+                      "description": "YAML manifest file for deployment",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "manifestFile"
+                  ]
+                },
+                {
+                  "title": "stepSequence",
+                  "properties": {
+                    "deploymentSteps": {
+                      "title": "Deployment Steps",
+                      "description": "Ordered list of deployment steps",
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "required": [
+                    "deploymentSteps"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "healthChecks": {
+                  "title": "Health Check Steps",
+                  "description": "Steps to verify deployment health",
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

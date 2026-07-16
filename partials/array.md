@@ -1,3 +1,4 @@
+{{debug "array" .~}}
 {{#if (isdefined items)~}}
 {{#if (equal (gettype items) "array")}}
 {{#each items}}
@@ -22,7 +23,7 @@
 
 {{/if~}}
 
-{{> type items path=(pathjoin path "" .) prefix_text="Item "~}}
+{{> type items path=(pathjoin path "" .) prefix_text="Item " level=level~}}
 {{/if~}}
 
 
@@ -47,7 +48,7 @@
 
 {{/if~}}
 
-{{> type contains path=(pathjoin path "" .) prefix_text="Contains Item "~}}
+{{> type contains path=(pathjoin path "" .) prefix_text="Contains Item " level=level~}}
 
 {{#if (isdefined minContains)}}
 **Minimum Contains:** {{escape minContains}}{{br}}
@@ -57,3 +58,4 @@
 {{/if~}}
 
 {{/if~}}
+{{debug "/array" .~}}
