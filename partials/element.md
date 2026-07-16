@@ -13,5 +13,7 @@
 {{> example ~}}
 {{/each ~}}
 {{#each (get_ref_items) ~}}
+{{br}}
+{{hr~}}
 {{>element . ~}}
 {{/each ~}}

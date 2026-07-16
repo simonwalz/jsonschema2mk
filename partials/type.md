@@ -1,63 +1,64 @@
-{{#if (noproperties .)}}
-{{#if required}}
+{{#if (noproperties .)~}}
+{{#if required~}}
 **Required Properties:**
 
 {{#each required}}
-  * {{this}}
-{{/each}}
-{{else}}
+{{li}}{{this}}
+{{/each~}}
+{{else~}}
 **No properties.**
 
-{{/if}}
-{{/if}}
+{{/if~}}
+{{/if~}}
 {{#if (is_type type "object") ~}}
 {{> object . ~}}
 {{~else~}}
 {{#if (is_type type "array") ~}}
 {{> array . ~}}
 {{~else~}}
-{{> simple ~}}
+{{> simple . ~}}
 {{/if ~}}
 {{/if ~}}
 
-{{#each oneOf}}
- {{br}}
+{{~#each oneOf~}}
+{{br}}
 **Option {{plus @key 1}} (alternative):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": ")))}}
-{{/each}}
-{{#each anyOf}}
- {{br}}
-**Option {{plus @key 1}} (optional):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) "]: ")))}}
-{{/each}}
-{{#each allOf}}
- {{br}}
+{{/each~}}
+{{#each anyOf~}}
+{{br}}
+**Option {{plus @key 1}} (optional):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": ")))}}
+{{/each~}}
+{{#each allOf~}}
+{{br}}
+**All of {{plus @key 1}}:**
 {{> element_part . type=(or type ../type) path=(pathjoin path @key)}}
-{{/each}}
-{{#each not}}
- {{br}}
+{{/each~}}
+{{#each not~}}
+{{br}}
 **Not [{{plus @key 1}}]:** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "not[" (plus (plus @key 1) "]: ")))}}
-{{/each}}
-{{#if if}}
- {{br}}
+{{/each~}}
+{{#if if~}}
+{{br}}
 {{explain if type}}
 
 {{#if (isdefined then)~}}
 **THEN**
 
-{{#if then}}
+{{#if then~}}
 {{> element_part then type=(or then.type type) path=(pathjoin path "then")}}
-{{else}}
+{{else~}}
 never valid.
 {{/if}}
 
-{{/if}}
+{{/if~}}
 {{#if (isdefined else)~}}
 **OTHERWISE**
 
-{{#if else}}
+{{#if else~}}
 {{> element_part else type=(or then.type type) path=(pathjoin path "else")}}
-{{else}}
+{{else~}}
 never valid.
-{{/if}}
+{{/if~}}
 
-{{/if}}
-{{/if}}
+{{/if~}}
+{{/if~}}

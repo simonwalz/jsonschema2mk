@@ -7,37 +7,37 @@
 {{~#if (is_type type "string") ~}}
 	{{~#if (isdefined contentMediaType)~}}
 **{{prefix_text}}Content Media Type:** {{jsoninline contentMediaType}}{{br}}
-{{/if}}
+{{/if~}}
 	{{~#if (isdefined contentEncoding)~}}
 **{{prefix_text}}Content Encoding:** {{jsoninline contentEncoding}}{{br}}
-{{/if}}
+{{/if~}}
 	{{~#if (isdefined minLength)~}}
 **{{prefix_text}}Minimal Length:** {{jsoninline minLength}}{{br}}
-{{/if}}
+{{/if~}}
 	{{~#if (isdefined maxLength)~}}
 **{{prefix_text}}Maximal Length:** {{jsoninline maxLength}}{{br}}
-{{/if}}
+{{/if~}}
 	{{~#if (isdefined format)~}}
 **{{prefix_text}}Format:** {{jsoninline format}}{{br}}
-{{/if}}
+{{/if~}}
 	{{~#if (isdefined pattern)~}}
 **{{prefix_text}}Pattern:** {{code (escapeRegexp pattern)}}{{br}}
-{{/if}}
-{{~/if}}
+{{/if~}}
+{{~/if~}}
 {{~#if (or (is_type type "number") (is_type type "integer"))~}}
 	{{~#if (isdefined exclusiveMinimum)~}}
 **{{prefix_text}}Minimum (exclusive):** {{jsoninline exclusiveMinimum}}{{br}}
-{{/if}}
+{{/if~}}
 	{{~#if (isdefined minimum)~}}
 **{{prefix_text}}Minimum:** {{jsoninline minimum}}{{br}}
-{{/if}}
+{{/if~}}
 	{{~#if (isdefined exclusiveMaximum)~}}
 **{{prefix_text}}Maximum (exclusive):** {{jsoninline exclusiveMaximum}}{{br}}
-{{/if}}
+{{/if~}}
 	{{~#if (isdefined maximum)~}}
 **{{prefix_text}}Maximum:** {{jsoninline maximum}}{{br}}
-{{/if}}
+{{/if~}}
 	{{~#if (isdefined multipleOf)~}}
 **{{prefix_text}}Multiple of:** {{jsoninline multipleOf}}{{br}}
-{{/if}}
+{{/if~}}
 {{~/if~}}

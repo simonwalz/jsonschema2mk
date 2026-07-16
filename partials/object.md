@@ -15,38 +15,38 @@
 {{> object_property (jsmk_property . path=(pathjoinobj ../path @key .) parent=.. name=@key)}}
 {{/each}}
 
-{{/if}}
-{{#if (isdefined additionalProperties)}}
-{{#if (equal (gettype additionalProperties) "boolean")}}
+{{/if~}}
+{{#if (isdefined additionalProperties)~}}
+{{#if (equal (gettype additionalProperties) "boolean")~}}
 **{{prefix_text}}Additional Properties:** {{#unless additionalProperties}}not {{/unless}}allowed{{br}}
-{{else}}
+{{else~}}
 **{{prefix_text}}Additional Properties**
 
-{{> object_property_header}}
+{{> object_property_header~}}
 {{> object_property (jsmk_property additionalProperties path=(pathjoin path "additionalProperties" additionalProperties) parent=. name="Additional Properties")}}
 
-{{/if}}
+{{/if~}}
 {{/if~}}
 
-{{#if (isdefined minProperties)}}
+{{#if (isdefined minProperties)~}}
 **{{prefix_text}}Minimal Properties:** {{escape minProperties}}{{br}}
 {{/if~}}
-{{#if (isdefined maxProperties)}}
+{{#if (isdefined maxProperties)~}}
 **{{prefix_text}}Maximal Properties:** {{escape maxProperties}}{{br}}
 {{/if~}}
-{{#if (and (isdefined propertyNames) (isdefined propertyNames.pattern))}}
+{{#if (and (isdefined propertyNames) (isdefined propertyNames.pattern))~}}
 **{{prefix_text}}Property Name Pattern:** {{code (escapeRegexp propertyNames.pattern)}}{{br}}
 {{/if~}}
-{{#if (isdefined dependentRequired)}}
-{{#each dependentRequired}}
+{{#if (isdefined dependentRequired)~}}
+{{#each dependentRequired~}}
 **{{prefix_text}}If property *{{@key}}* is defined**, property/ies {{#each this}}*{{this}}*{{#unless @last}}, {{/unless}}{{/each}} is/are required.{{br}}
-{{/each}}
+{{/each~}}
 {{/if~}}
-{{#if (isdefined dependentSchemas)}}
-{{#each dependentSchemas}}
+{{#if (isdefined dependentSchemas)~}}
+{{#each dependentSchemas~}}
 **{{prefix_text}}If property *{{@key}}* is defined**:
 
 {{> element_part this type=(or type ../type) path=(pathjoin path (plus "dependentSchemas " @key))}}
 
-{{/each}}
+{{/each~}}
 {{/if~}}

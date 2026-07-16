@@ -3,7 +3,15 @@ const explain_json_schema = require("explain-json-schema").explain;
 
 exports.br = function() {
 	//return new Handlebars.SafeString("<br/>");
-	return new Handlebars.SafeString("  ");
+	return new Handlebars.SafeString("   ");
+};
+exports.hr = function() {
+	//return new Handlebars.SafeString("<br/>");
+	return new Handlebars.SafeString("\n---\n");
+};
+exports.li = function() {
+	//return new Handlebars.SafeString("<br/>");
+	return new Handlebars.SafeString("  * ");
 };
 
 exports.or = function(a, b) {
