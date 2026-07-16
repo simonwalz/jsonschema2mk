@@ -1,7 +1,4 @@
-{{#if path~}}
-<a name="{{{tolink (or path 'root')}}}"></a>
-{{/if~}}
-{{{mdlevel path}}}{{#if path}} {{escape path}}:{{/if}} {{escape (or title (or type 'any'))}}
+{{>heading .~}}
 {{#if (or description deprecated)}}
 
 {{#if deprecated}}(DEPRECATED) {{/if}}{{{description}}}
@@ -13,7 +10,5 @@
 {{> example ~}}
 {{/each ~}}
 {{#each (get_ref_items) ~}}
-{{br}}
-{{hr~}}
 {{>element . ~}}
 {{/each ~}}
