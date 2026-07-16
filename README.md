@@ -131,6 +131,7 @@ Implemented Extensions:
   * `table-format-2`: Show tables with the columns *name*, *type*, *title*, *description* and *required*. Default is to display a combined *name* and *title* column. See [example output](test/010-example-artnet-table2.md).
   * `yaml-examples`: Show examples in YAML format.
   * `front-matter`: Add a [front matter block](https://jekyllrb.com/docs/front-matter/).<br/>You can define the front-matter with `--fm.para1 value1 --fm.para2 value2`
+  * `hr-before-heading`: Show horizontal line before headings.
 
 Example Calls:
 
