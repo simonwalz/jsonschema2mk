@@ -124,6 +124,11 @@ exports.debug = function(partial, object) {
 };
 
 exports.pathjoinobj = function(path, property_name, object) {
+	// If ref is set, we assume, that it is a global object. So we don't
+	// need the relative path:
+	if (object["$ref"]) {
+		path = "";
+	}
 	if (property_name === "") {
 		path = (path ? path : "item");
 	} else {
@@ -133,7 +138,7 @@ exports.pathjoinobj = function(path, property_name, object) {
 	// dont increment level on oneOf, anyOf, allOf, not:
 	return path.replace(/: \./, ": ");
 }
-exports.pathjoin = function(path, property_name, object) {
+exports.pathjoin = function(path, property_name) {
 	if (property_name === "") {
 		path = (path ? path : "item");
 	} else {
