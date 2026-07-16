@@ -3,7 +3,7 @@
 Beschreibung
 
 
-**Type:** `string`  
+**Type:** `string`   
 **Example**
 
 ```json

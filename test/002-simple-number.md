@@ -3,9 +3,9 @@
 Beschreibung
 
 
-**Type:** `number`  
-**Minimum:** `0`  
-**Maximum:** `60`  
+**Type:** `number`   
+**Minimum:** `0`   
+**Maximum:** `60`   
 **Example**
 
 ```json

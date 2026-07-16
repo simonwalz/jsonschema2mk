@@ -14,7 +14,7 @@ This application allows controlling lights over the Art-Net protocol.
 |**iface**|`string`|Interface|Interface to bind the Art-Net socket to<br/>||
 |[**map**](#map)|`object[]`|DMX channels|||
 
-**Additional Properties:** not allowed  
+**Additional Properties:** not allowed   
 **Example**
 
 ```json
@@ -34,6 +34,9 @@ This application allows controlling lights over the Art-Net protocol.
 }
 ```
 
+   
+
+---
 <a name="map"></a>
 ## map\[\]: DMX channels
 
@@ -47,7 +50,7 @@ This application allows controlling lights over the Art-Net protocol.
 |**node**|`string`|Node Name|||
 |**default\_value**|`number`|Default Value|Minimum: `0`<br/>Maximum: `255`<br/>||
 
-**Item Additional Properties:** not allowed  
+**Item Additional Properties:** not allowed   
 **Example**
 
 ```json

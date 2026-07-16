@@ -20,6 +20,9 @@
 }
 ```
 
+   
+
+---
 <a name="additionalproperties"></a>
 ## additionalProperties: object
 
