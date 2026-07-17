@@ -7,7 +7,7 @@ Test for issue #28
 
 |Name|Type|Description|Required|
 |----|----|-----------|--------|
-|[**property**](#property)|`object`|My reffered Property<br/>||
+|[**property**](#defsmyref)|`object`|My reffered Property<br/>||
 
 **Example**
 
@@ -21,8 +21,8 @@ Test for issue #28
 ```
 
    
-<a name="property"></a>
-## property: object
+<a name="defsmyref"></a>
+## $defs/MyRef: object
 
 My reffered Property
 

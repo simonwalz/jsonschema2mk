@@ -65,7 +65,7 @@ Deployment execution options
 
 |Name|Type|Description|Required|
 |----|----|-----------|--------|
-|[**deploymentSteps**](#option2deploymentsteps)|`object[]`|Ordered list of deployment steps<br/>|yes|
+|[**deploymentSteps**](#deploymentkubernetesdeploymentsteps-allof1-option2)|`object[]`|Ordered list of deployment steps<br/>|yes|
 
 **Example**
 
@@ -85,7 +85,7 @@ Deployment execution options
 
 |Name|Type|Description|Required|
 |----|----|-----------|--------|
-|[**healthChecks**](#allof2healthchecks)<br/>(Health Check Steps)|`object[]`|Steps to verify deployment health<br/>||
+|[**healthChecks**](#deploymentkuberneteshealthchecks-allof2)<br/>(Health Check Steps)|`object[]`|Steps to verify deployment health<br/>||
 
 **Example**
 
@@ -98,8 +98,8 @@ Deployment execution options
 ```
 
    
-<a name="option2deploymentsteps"></a>
-#### Option 2: deploymentSteps\[\]: Deployment Steps
+<a name="deploymentkubernetesdeploymentsteps-allof1-option2"></a>
+#### deployment\.kubernetes\.deploymentSteps\[\]: Deployment Steps (All of 1, Option 2)
 
 Ordered list of deployment steps
 
@@ -117,8 +117,8 @@ Ordered list of deployment steps
 ```
 
    
-<a name="allof2healthchecks"></a>
-#### All of 2: healthChecks\[\]: Health Check Steps
+<a name="deploymentkuberneteshealthchecks-allof2"></a>
+#### deployment\.kubernetes\.healthChecks\[\]: Health Check Steps (All of 2)
 
 Steps to verify deployment health
 

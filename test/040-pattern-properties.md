@@ -49,7 +49,7 @@ Cassandra
 |Name|Type|Description|Required|
 |----|----|-----------|--------|
 |**type**|`string`|type<br/>Enum: `"cassandra"`<br/>|yes|
-|[**hosts**](#option2hosts)|`string[]`|hosts<br/>|yes|
+|[**hosts**](#doesnotcontainhosts-option2)|`string[]`|hosts<br/>|yes|
 
 **Additional Properties:** not allowed   
 **Example**
@@ -67,8 +67,8 @@ Cassandra
 
 
    
-<a name="option2hosts"></a>
-### Option 2: hosts\[\]: array
+<a name="doesnotcontainhosts-option2"></a>
+### ^\(?\!\.\*doesnotcontain\)\.\*$\.hosts\[\]: array (Option 2)
 
 hosts
 

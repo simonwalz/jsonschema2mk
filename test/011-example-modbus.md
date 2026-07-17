@@ -15,8 +15,8 @@ Modbus Serial Interface
 |----|----|-----------|--------|
 |**connect\_type**<br/>(Connection Type)|`string`|Enum: `"RTU"`, `"C701"`, `"RTUBuffered"`, `"AsciiSerial"`<br/>||
 |**connect\_path**|`string`|i.e. device path<br/>||
-|[**connect\_options**](#option1connect_options)<br/>(Serial Connect Options)|`object`|||
-|[**map**](#map)<br/>(Modbus devices)|`object[]`|||
+|[**connect\_options**](#connect_options-option1)<br/>(Serial Connect Options)|`object`|||
+|[**map**](#definitionsmap)<br/>(Modbus devices)|`object[]`|||
 
 **Example**
 
@@ -42,8 +42,8 @@ Modbus Network Interface
 |----|----|-----------|--------|
 |**connect\_type**<br/>(Connection Type)|`string`|Enum: `"TCP"`, `"Telnet"`<br/>||
 |**connect\_path**<br/>(Host)|`string`|i.e. an IP address or host name<br/>||
-|[**connect\_options**](#option2connect_options)<br/>(Network Connect Options)|`object`|||
-|[**map**](#map)<br/>(Modbus devices)|`object[]`|||
+|[**connect\_options**](#connect_options-option2)<br/>(Network Connect Options)|`object`|||
+|[**map**](#definitionsmap)<br/>(Modbus devices)|`object[]`|||
 
 **Example**
 
@@ -59,8 +59,8 @@ Modbus Network Interface
 
 
    
-<a name="option1connect_options"></a>
-## Option 1: connect\_options: Serial Connect Options
+<a name="connect_options-option1"></a>
+## connect\_options: Serial Connect Options (Option 1)
 
 **Properties**
 
@@ -69,8 +69,18 @@ Modbus Network Interface
 |**baudRate**<br/>(Baud rate)|`number`|||
 
    
-<a name="map"></a>
-## map: Modbus devices
+<a name="connect_options-option2"></a>
+## connect\_options: Network Connect Options (Option 2)
+
+**Properties**
+
+|Name|Type|Description|Required|
+|----|----|-----------|--------|
+|**port**|`number`|||
+
+   
+<a name="definitionsmap"></a>
+## definitions/map: Modbus devices
 
 **Items**
 
@@ -83,7 +93,7 @@ Modbus Network Interface
 |**address**<br/>(Modbus Field Address)|`number`|Minimum: `0`<br/>|yes|
 |**type**<br/>(Modbus Field Type)|`string`|Enum: `"input boolean"`, `"input register"`, `"output boolen"`, `"output register"`<br/>|no|
 |**datatype**<br/>(Field Data Type)|`string`|Default: `"uint16"`<br/>Enum: `"boolean"`, `"uint16"`<br/>|yes|
-|[**metadata**](#mapmetadata)<br/>(Node Metadata)|`object`||no|
+|[**metadata**](#definitionsmapmetadata)<br/>(Node Metadata)|`object`||no|
 
 **Example**
 
@@ -103,18 +113,8 @@ Modbus Network Interface
 ```
 
    
-<a name="mapmetadata"></a>
-### map\.metadata: Node Metadata
+<a name="definitionsmapmetadata"></a>
+### definitions/map\.metadata: Node Metadata
 
 **Additional Properties:** allowed   
-   
-<a name="option2connect_options"></a>
-## Option 2: connect\_options: Network Connect Options
-
-**Properties**
-
-|Name|Type|Description|Required|
-|----|----|-----------|--------|
-|**port**|`number`|||
-
 

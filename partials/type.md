@@ -23,20 +23,20 @@
 
 {{~#each oneOf~}}
 {{br}}
-**Option {{plus @key 1}} (alternative):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": "))) level=../level}}
+**Option {{plus @key 1}} (alternative):** {{> element_part . type=(or type ../type) path=../path pathpost=(pathpostjoin ../pathpost "Option" @key) level=../level}}
 {{/each~}}
 {{#each anyOf~}}
 {{br}}
-**Option {{plus @key 1}} (optional):** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "Option " (plus (plus @key 1) ": "))) level=../level}}
+**Option {{plus @key 1}} (optional):** {{> element_part . type=(or type ../type) path=../path pathpost=(pathpostjoin ../pathpost "Option" @key) level=../level}}
 {{/each~}}
 {{#each allOf~}}
 {{br}}
 **All of {{plus @key 1}}:**
-{{> element_part . type=(or type ../type) path=(pathjoin path (plus "All of " (plus (plus @key 1) ": "))) level=../level}}
+{{> element_part . type=(or type ../type) path=../path pathpost=(pathpostjoin ../pathpost "All of" @key) level=../level}}
 {{/each~}}
 {{#each not~}}
 {{br}}
-**Not [{{plus @key 1}}]:** {{> element_part . type=(or type ../type) path=(pathjoin path (plus "not[" (plus (plus @key 1) "]: "))) level=../level}}
+**Not [{{plus @key 1}}]:** {{> element_part . type=(or type ../type) path=../path pathpost=(pathpostjoin ../pathpost "Not" @key) level=../level}}
 {{/each~}}
 {{#if if~}}
 {{br}}

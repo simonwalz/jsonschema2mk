@@ -115,10 +115,9 @@ exports.plus_level = function(level, increment, context) {
 
 exports.debug = function(partial, object) {
 	const level = object.level;
-	const path = object.path;
 	let pre = "  ".repeat(level);
 	if (process && process.env.DEBUG) {
-		console.debug(pre, "debug:", partial, "level", level, path);
+		console.error(pre, "debug:", partial, "level", level, exports.get_path(object));
 	}
 	return "";
 };
@@ -147,13 +146,30 @@ exports.pathjoin = function(path, property_name) {
 	// dont increment level on oneOf, anyOf, allOf, not:
 	return path.replace(/: \./, ": ");
 };
+exports.pathpostjoinobj = function(pathpost, object) {
+	if (object["$ref"]) {
+		return undefined;
+	}
+	return pathpost;
+};
+exports.pathpostjoin = function(pathpost, name, key) {
+	if (!Array.isArray(pathpost)) {
+		pathpost = [];
+	} else {
+		pathpost = [...pathpost];
+	}
+	pathpost.push(name + " " + (1+key));
+	return pathpost;
+}
 
 exports.jsmk_property = function(property, options) {
-	property = exports.getref(property);
-	var o = {
+	var p = {
 		...property,
 		...options.hash,
 	};
+	var o = exports.getref(p);
+	o.level = p.level;
+	o.name = p.name;
 	let pre = "  ".repeat(o.level);
 	//console.log(pre, "property level", o.level);
 	if (!Array.isArray(o.examples) || !o.examples.length) {
@@ -173,7 +189,10 @@ exports.jsmk_property = function(property, options) {
 	if (exports.is_type(o.type, "object") ||
 			exports.is_type(o.type, "array")) {
 		exports.push_ref_item(o);
-		o.link = "#"+o.path;
+		o.link = o.path;
+		if (Array.isArray(o.pathpost)) {
+			o.link += "-"+o.pathpost.join("-");
+		}
 	}
 
 	if (typeof o.required === "undefined" &&
@@ -190,12 +209,30 @@ var ref_items = [];
 exports.get_ref_items = function() {
 	var r = ref_items;
 	ref_items = [];
+	r.sort((a,b)=>{
+		const pa = exports.get_path(a);
+		const pb = exports.get_path(b);
+		if (pa < pb)
+			return -1;
+		if ( pa > pb)
+			return 1;
+		return 0;
+	});
 	return r;
 };
+exports.get_path = function(item) {
+	if (item["$ref"]) return "zzz "+item["$ref"];
+	let path = item.path;
+	if (Array.isArray(item.pathpost)) {
+		path += " (" + item.pathpost.join(", ") + ")";
+	}
+	return path;
+}
 
 exports.push_ref_item = function(item) {
+	const path = exports.get_path(item);
 	if (ref_items.filter(function(ri) {
-		return ri.path === item.path;
+		return exports.get_path(ri) === path;
 	}).length) {
 		return;
 	}
@@ -207,7 +244,7 @@ exports.mylink = function(object, options) {
 	if (object.link) {
 		var link = exports.tolink(object.link);
 		return new Handlebars.SafeString(
-			"["+options.fn(object)+"]("+link+")");
+			"["+options.fn(object)+"](#"+link+")");
 	}
 	return options.fn(object);
 };
@@ -281,6 +318,7 @@ exports.getref = function(object) {
 				}
 			});
 			o.path = path;
+			o['$ref'] = object['$ref'];
 			return o;
 		}
 
