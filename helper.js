@@ -209,9 +209,10 @@ var ref_items = [];
 exports.get_ref_items = function() {
 	var r = ref_items;
 	ref_items = [];
+	// provide $ref items after normal items:
 	r.sort((a,b)=>{
-		const pa = exports.get_path(a);
-		const pb = exports.get_path(b);
+		const pa = exports.get_path_sort(a);
+		const pb = exports.get_path_sort(b);
 		if (pa < pb)
 			return -1;
 		if ( pa > pb)
@@ -227,6 +228,10 @@ exports.get_path = function(item) {
 		path += " (" + item.pathpost.join(", ") + ")";
 	}
 	return path;
+}
+exports.get_path_sort = function(item) {
+	if (item["$ref"]) return 1;
+	return 0;
 }
 
 exports.push_ref_item = function(item) {
