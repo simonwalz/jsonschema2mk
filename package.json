@@ -1,6 +1,6 @@
 {
   "name": "jsonschema2mk",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "JSON schema to markdown generator",
   "main": "index.js",
   "bin": "cli.js",
